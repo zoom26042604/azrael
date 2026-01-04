@@ -47,10 +47,8 @@ const LocationMap = memo(function LocationMap() {
 
       try {
         // Dynamically import Leaflet
-        const [{ default: L }] = await Promise.all([
-          import('leaflet'),
-          import('leaflet/dist/leaflet.css')
-        ]);
+        const { default: L } = await import('leaflet');
+        await import('leaflet/dist/leaflet.css' as any);
 
         if (!isMounted || !mapContainerRef.current) return;
 
@@ -63,8 +61,7 @@ const LocationMap = memo(function LocationMap() {
           doubleClickZoom: false,
           boxZoom: false,
           keyboard: false,
-          touchZoom: false,
-          tap: false
+          touchZoom: false
         }).setView(TOULOUSE_COORDS, DEFAULT_ZOOM);
 
         // Add dark theme tiles

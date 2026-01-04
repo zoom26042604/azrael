@@ -30,7 +30,7 @@ export default function ThemeSelector() {
       </h3>
       <div 
         className="relative mb-4 flex flex-wrap items-center justify-center gap-1 rounded-md p-1 ring-1 md:justify-start"
-        style={{ ringColor: 'var(--color-surface0)' }}
+        style={{ borderColor: 'var(--color-surface0)' }}
       >
         {THEMES.map((name) => {
           const isSelected = theme === name;
@@ -47,8 +47,8 @@ export default function ThemeSelector() {
               style={{
                 backgroundColor: isSelected ? 'var(--color-base)' : 'transparent',
                 color: isSelected ? 'var(--color-text)' : 'var(--color-subtext1)',
-                ringColor: isSelected ? 'color-mix(in srgb, var(--color-accent) 70%, transparent)' : 'transparent'
-              }}
+                ['--tw-ring-color' as any]: isSelected ? 'color-mix(in srgb, var(--color-accent) 70%, transparent)' : 'transparent'
+              } as React.CSSProperties}
               onMouseEnter={(e) => {
                 if (!isSelected) {
                   e.currentTarget.style.color = 'var(--color-subtext0)';

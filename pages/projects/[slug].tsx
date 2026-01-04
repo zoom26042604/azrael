@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import Image from 'next/image';
 import { Github, ExternalLink, Calendar, Tag, ArrowLeft } from 'lucide-react';
 import { getTagColor } from '@/src/lib/tagColors';
 import { projects } from '@/src/data/projects';

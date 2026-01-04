@@ -5,249 +5,249 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-38B2AC?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat)](LICENSE)
 
-> Portfolio moderne et multilingue développé avec Next.js 16, TypeScript et le système de design Catppuccin.
+> Modern multilingual portfolio built with Next.js 16, TypeScript, and Catppuccin design system.
 
-[🌐 Site en ligne](https://nathan-ferre.fr) | [📧 Contact](mailto:nathan.ferre@ynov.com)
-
----
-
-## 🎨 Aperçu
-
-Portfolio personnel présentant mes compétences, projets et expériences professionnelles avec une interface moderne et responsive. Le site intègre le système de thèmes Catppuccin avec une couleur d'accent orange cohérente.
-
-### ✨ Fonctionnalités principales
-
-- 🌍 **Multilingue** : Support complet FR/EN/KO avec changement dynamique
-- 🎨 **Thèmes Catppuccin** : Mode clair (Latte) et sombre (Mocha)
-- 🎯 **Couleur d'accent orange** : Couleur Peach pour tous les éléments interactifs
-- 📱 **100% Responsive** : Design adaptatif mobile, tablette et desktop
-- ⌨️ **Navigation clavier** : Breadcrumb éditable avec raccourci Espace
-- 🔍 **Recherche avancée** : Filtrage et tri des projets en temps réel
-- 🗺️ **Carte interactive** : Localisation avec Leaflet et heure locale
-- 🎮 **Mini-jeu 2048** : Intégré avec sauvegarde des scores
-- ♿ **Accessibilité** : ARIA labels et navigation optimisée
-- ⚡ **Performances** : Score Lighthouse > 90/100
+[🌐 Live Site](https://nathan-ferre.fr) | [📧 Contact](mailto:nathan.ferre@ynov.com)
 
 ---
 
-## 🚀 Démarrage rapide
+## 🎨 Overview
 
-### Prérequis
+Personal portfolio showcasing my skills, projects, and professional experience with a modern and responsive interface. The site integrates the Catppuccin theme system with a consistent orange accent color.
+
+### ✨ Key Features
+
+- 🌍 **Multilingual**: Full FR/EN/KO support with dynamic switching
+- 🎨 **Catppuccin Themes**: Light (Latte) and Dark (Mocha) modes
+- 🎯 **Orange Accent Color**: Peach color for all interactive elements
+- 📱 **100% Responsive**: Adaptive design for mobile, tablet, and desktop
+- ⌨️ **Keyboard Navigation**: Editable breadcrumb with Space shortcut
+- 🔍 **Advanced Search**: Real-time project filtering and sorting
+- 🗺️ **Interactive Map**: Location display with Leaflet and local time
+- 🎮 **2048 Mini-game**: Integrated with score saving
+- ♿ **Accessibility**: ARIA labels and optimized navigation
+- ⚡ **Performance**: Lighthouse score > 90/100
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
 
 - Node.js 20+ 
-- npm, yarn, pnpm ou bun
+- npm, yarn, pnpm, or bun
 
 ### Installation
 
-```bash
-# Cloner le repository
+\`\`\`bash
+# Clone the repository
 git clone https://github.com/zoom26042604/azrael.git
 cd azrael
 
-# Installer les dépendances
+# Install dependencies
 npm install
 
-# Lancer le serveur de développement
+# Start development server
 npm run dev
-```
+\`\`\`
 
-Le site sera accessible sur [http://localhost:3000](http://localhost:3000)
+The site will be available at [http://localhost:3000](http://localhost:3000)
 
-### Scripts disponibles
+### Available Scripts
 
-```bash
-npm run dev      # Développement avec Turbopack
-npm run build    # Build de production
-npm run start    # Serveur de production
-npm run lint     # Vérification ESLint
-```
+\`\`\`bash
+npm run dev      # Development with Turbopack
+npm run build    # Production build
+npm run start    # Production server
+npm run lint     # ESLint check
+\`\`\`
 
 ---
 
 ## 🏗️ Architecture
 
-```
+\`\`\`
 azrael/
-├── pages/                    # Pages Next.js (routing)
-│   ├── _app.tsx             # Configuration globale
-│   ├── _document.tsx        # Structure HTML
-│   ├── index.tsx            # Page d'accueil
-│   ├── about.tsx            # À propos
-│   ├── projects/            # Projets
+├── pages/                    # Next.js pages (routing)
+│   ├── _app.tsx             # Global configuration
+│   ├── _document.tsx        # HTML structure
+│   ├── index.tsx            # Home page
+│   ├── about.tsx            # About
+│   ├── projects/            # Projects
 │   ├── contact.tsx          # Contact
 │   └── api/                 # API routes
 ├── src/
-│   ├── components/          # Composants React
-│   │   ├── features/        # Composants métier
+│   ├── components/          # React components
+│   │   ├── features/        # Business components
 │   │   ├── layout/          # Layout (Header, Sidebar, Footer)
-│   │   └── ui/              # Composants UI réutilisables
-│   ├── contexts/            # Contextes React (Theme, Language)
-│   ├── data/                # Données statiques
-│   ├── hooks/               # Hooks personnalisés
-│   ├── lib/                 # Utilitaires et constantes
-│   └── types/               # Types TypeScript
-├── public/                  # Assets statiques
-└── styles/                  # Styles globaux CSS
-```
+│   │   └── ui/              # Reusable UI components
+│   ├── contexts/            # React contexts (Theme, Language)
+│   ├── data/                # Static data
+│   ├── hooks/               # Custom hooks
+│   ├── lib/                 # Utilities and constants
+│   └── types/               # TypeScript types
+├── public/                  # Static assets
+└── styles/                  # Global CSS styles
+\`\`\`
 
 ---
 
-## 🛠️ Stack technique
+## 🛠️ Tech Stack
 
 ### Core
 
-- **[Next.js 16](https://nextjs.org/)** - Framework React avec Turbopack
-- **[React 19](https://react.dev/)** - Bibliothèque UI
-- **[TypeScript 5](https://www.typescriptlang.org/)** - Typage statique
-- **[Tailwind CSS 4](https://tailwindcss.com/)** - Framework CSS utility-first
+- **[Next.js 16](https://nextjs.org/)** - React framework with Turbopack
+- **[React 19](https://react.dev/)** - UI library
+- **[TypeScript 5](https://www.typescriptlang.org/)** - Static typing
+- **[Tailwind CSS 4](https://tailwindcss.com/)** - Utility-first CSS framework
 
-### Librairies
+### Libraries
 
-- **[Leaflet](https://leafletjs.com/)** - Carte interactive
-- **[Lucide React](https://lucide.dev/)** - Icônes modernes
-- **[React Icons](https://react-icons.github.io/react-icons/)** - Collection d'icônes
+- **[Leaflet](https://leafletjs.com/)** - Interactive maps
+- **[Lucide React](https://lucide.dev/)** - Modern icons
+- **[React Icons](https://react-icons.github.io/react-icons/)** - Icon collection
 
 ### Design System
 
-- **[Catppuccin](https://github.com/catppuccin/catppuccin)** - Palette de couleurs pastel
-  - 2 thèmes : Latte (clair) et Mocha (sombre)
-  - Couleur d'accent orange (Peach) fixe
-  - Variables CSS pour changement dynamique
+- **[Catppuccin](https://github.com/catppuccin/catppuccin)** - Pastel color palette
+  - 2 themes: Latte (light) and Mocha (dark)
+  - Fixed orange accent color (Peach)
+  - CSS variables for dynamic switching
 
 ---
 
-## 🎨 Système de thèmes
+## 🎨 Theme System
 
-Le portfolio utilise le système Catppuccin avec deux thèmes principaux :
+The portfolio uses the Catppuccin system with two main themes:
 
-### Thèmes disponibles
+### Available Themes
 
-| Thème | Variant Catppuccin | Description |
+| Theme | Catppuccin Variant | Description |
 |-------|-------------------|-------------|
-| `light` | Latte | Mode clair avec tons pastels chauds |
-| `dark` | Mocha | Mode sombre avec tons pastels doux |
+| \`light\` | Latte | Light mode with warm pastel tones |
+| \`dark\` | Mocha | Dark mode with soft pastel tones |
 
-### Couleur d'accent
+### Accent Color
 
-Le portfolio utilise une couleur d'accent orange fixe (**Peach**) pour tous les éléments interactifs, garantissant une identité visuelle cohérente.
+The portfolio uses a fixed orange accent color (**Peach**) for all interactive elements, ensuring consistent visual identity.
 
-### Persistance
+### Persistence
 
-Les préférences utilisateur (thème, langue, scores) sont sauvegardées dans `localStorage` pour une expérience personnalisée.
-
----
-
-## 🌍 Internationalisation
-
-Support complet de 3 langues :
-
-- 🇫🇷 **Français** (défaut)
-- 🇬🇧 **Anglais**
-- 🇰🇷 **Coréen**
-
-Toutes les traductions sont centralisées dans `src/contexts/LanguageContext.tsx`.
+User preferences (theme, language, scores) are saved in \`localStorage\` for a personalized experience.
 
 ---
 
-## 📦 Déploiement
+## 🌍 Internationalization
 
-### Build manuel
+Full support for 3 languages:
 
-```bash
+- 🇫🇷 **French** (default)
+- 🇬🇧 **English**
+- 🇰🇷 **Korean**
+
+All translations are centralized in \`src/contexts/LanguageContext.tsx\`.
+
+---
+
+## 📦 Deployment
+
+### Manual Build
+
+\`\`\`bash
 npm run build
 npm run start
-```
+\`\`\`
 
-Le build optimisé sera dans le dossier `.next/`
+The optimized build will be in the \`.next/\` folder
 
 ---
 
 ## 🔧 Configuration
 
-### Variables d'environnement
+### Environment Variables
 
-Créer un fichier `.env.local` :
+Create a \`.env.local\` file:
 
-```env
+\`\`\`env
 # Next.js
 NEXT_PUBLIC_SITE_URL=https://nathanferre.dev
 
-# API (optionnel)
+# API (optional)
 GITHUB_TOKEN=your_github_token_here
-```
+\`\`\`
 
-### Personnalisation
+### Customization
 
-- **Thèmes** : Modifier `src/lib/constants.ts`
-- **Traductions** : Éditer `src/contexts/LanguageContext.tsx`
-- **Projets** : Ajouter dans `src/data/projects.ts`
-- **Styles** : Personnaliser `styles/catppuccin.css`
-
----
-
-## 📝 Fonctionnalités détaillées
-
-### Navigation breadcrumb
-
-Breadcrumb dynamique avec édition au clavier :
-- Appuyer sur **Espace** pour activer l'édition
-- Taper le chemin (ex: `/projects`, `/about`)
-- **Entrée** pour valider, **Échap** pour annuler
-
-### Filtrage de projets
-
-- **Recherche** : Filtrage en temps réel par titre/description/tags
-- **Tri** : Par défaut, par nom (A-Z), ou par date (récents)
-- **Filtres rapides** : Boutons de tags technologiques
-
-### Carte interactive
-
-- Localisation géographique avec Leaflet
-- Affichage de l'heure locale
-- Marqueur personnalisé avec animation
+- **Themes**: Edit \`src/lib/constants.ts\`
+- **Translations**: Modify \`src/contexts/LanguageContext.tsx\`
+- **Projects**: Add to \`src/data/projects.ts\`
+- **Styles**: Customize \`styles/catppuccin.css\`
 
 ---
 
-## 🤝 Contribution
+## 📝 Detailed Features
 
-Les contributions sont les bienvenues ! 
+### Breadcrumb Navigation
 
-1. Fork le projet
-2. Créer une branche (`git checkout -b feature/AmazingFeature`)
-3. Commit les changements (`git commit -m 'Add AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
+Dynamic breadcrumb with keyboard editing:
+- Press **Space** to activate editing
+- Type the path (e.g., \`/projects\`, \`/about\`)
+- **Enter** to validate, **Escape** to cancel
+
+### Project Filtering
+
+- **Search**: Real-time filtering by title/description/tags
+- **Sort**: Default, by name (A-Z), or by date (recent)
+- **Quick Filters**: Technology tag buttons
+
+### Interactive Map
+
+- Geographic location with Leaflet
+- Local time display
+- Custom marker with animation
 
 ---
 
-## 📄 Licence
+## 🤝 Contributing
 
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+Contributions are welcome!
+
+1. Fork the project
+2. Create a branch (\`git checkout -b feature/AmazingFeature\`)
+3. Commit your changes (\`git commit -m 'Add AmazingFeature'\`)
+4. Push to the branch (\`git push origin feature/AmazingFeature\`)
+5. Open a Pull Request
 
 ---
 
-## 👤 Auteur
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👤 Author
 
 **Nathan FERRE**
 
-- 🌐 Website : [nathan-ferre.fr](https://nathan-ferre.fr)
-- 💼 LinkedIn : [Nathan FERRE](https://www.linkedin.com/in/nathan-ferre-0ba3a438a/)
-- 🐙 GitHub : [@zoom26042604](https://github.com/zoom26042604)
-- 📧 Email : nathan.ferre@ynov.com
+- 🌐 Website: [nathan-ferre.fr](https://nathan-ferre.fr)
+- 💼 LinkedIn: [Nathan FERRE](https://www.linkedin.com/in/nathan-ferre-0ba3a438a/)
+- 🐙 GitHub: [@zoom26042604](https://github.com/zoom26042604)
+- 📧 Email: nathan.ferre@ynov.com
 
 ---
 
-## 🙏 Remerciements
+## 🙏 Acknowledgments
 
-- [Catppuccin](https://github.com/catppuccin/catppuccin) pour le magnifique système de couleurs
-- [Next.js](https://nextjs.org) pour le framework incroyable
-- Communauté open-source pour l'inspiration
+- [Catppuccin](https://github.com/catppuccin/catppuccin) for the beautiful color system
+- [Next.js](https://nextjs.org) for the incredible framework
+- Open-source community for the inspiration
 
 ---
 
 <div align="center">
 
-**⭐ Si ce projet vous plaît, n'hésitez pas à lui donner une étoile !**
+**⭐ If you like this project, don't hesitate to give it a star!**
 
 Made with ❤️ and ☕ by Nathan FERRE
 

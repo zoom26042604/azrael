@@ -23,9 +23,9 @@ export default function ColorSelector() {
     transform: `translate(calc(${ringPosition.col} * (100% + 0.625rem)), calc(${ringPosition.row} * (100% + 0.625rem)))`,
     width: 'calc((100% - 6 * 0.625rem) / 7)',
     color: `var(--color-${accentColor})`,
-    ringColor: 'currentColor',
-    ringOffsetColor: 'var(--color-base)'
-  }), [ringPosition.col, ringPosition.row, accentColor]);
+    ['--tw-ring-color' as any]: 'currentColor',
+    ['--tw-ring-offset-color' as any]: 'var(--color-base)'
+  } as React.CSSProperties), [ringPosition.col, ringPosition.row, accentColor]);
 
   // Memoize toggle handler
   const toggleBackground = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {

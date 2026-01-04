@@ -137,13 +137,14 @@ export default function Sidebar({ isOpen, closeSidebar, openGuide }: SidebarProp
             </li>
 
             {moreNavItems.map((item) => {
-              const isActive = !item.external && currentPath === item.href;
+              const isActive = currentPath === item.href;
+              const external = 'external' in item ? item.external : false;
               return (
                 <li key={item.title}>
                   <a
                     href={item.href}
-                    target={item.external ? '_blank' : undefined}
-                    rel={item.external ? 'noopener noreferrer' : undefined}
+                    target={external ? '_blank' : undefined}
+                    rel={external ? 'noopener noreferrer' : undefined}
                     className="block rounded p-2 transition-colors duration-150 focus:outline-none"
                     style={{
                       backgroundColor: isActive ? 'var(--color-surface0)' : 'transparent'
