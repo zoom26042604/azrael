@@ -3,11 +3,11 @@ import { ExperienceTimelineItem } from '@/src/types';
 export const experienceTimeline: ExperienceTimelineItem[] = [
   {
     company: 'Ynov Campus',
-    role: 'experience.ynov_role',
+    role: 'Étudiant en Informatique',
     url: 'https://www.ynov.com',
     logoUrl: '/logos/ynov.jpeg',
     logoAlt: 'Ynov Campus',
     startDate: '2024-09-01',
-    details: 'experience.ynov_details'
+    details: 'Bachelor Informatique - Spécialisation Infrastructure'
   }
 ];

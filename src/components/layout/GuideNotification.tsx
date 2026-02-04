@@ -35,47 +35,48 @@ export default function GuideNotification({ onOpenGuide }: GuideNotificationProp
 
   return (
     <div
-      className="fixed top-6 left-1/2 -translate-x-1/2 animate-in slide-in-from-top duration-500"
+      className="fixed top-4 sm:top-6 left-2 right-2 sm:left-1/2 sm:right-auto sm:-translate-x-1/2 animate-in slide-in-from-top duration-500"
       style={{ zIndex: 9999 }}
     >
       <div
-        className="rounded-xl shadow-2xl px-6 py-4 flex items-center gap-4 border"
+        className="rounded-lg sm:rounded-xl shadow-2xl px-3 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 border"
         style={{
           backgroundColor: 'var(--color-mantle)',
           borderColor: 'var(--color-accent)',
-          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 2px var(--color-accent)',
-          maxWidth: '90vw',
+          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--color-accent)',
+          maxWidth: '100%',
         }}
       >
         <div
-          className="p-2 rounded-lg"
+          className="p-1.5 sm:p-2 rounded-lg hidden sm:block"
           style={{
             backgroundColor: 'var(--color-surface0)',
             color: 'var(--color-accent)',
           }}
         >
-          <Sparkles size={24} />
+          <Sparkles size={20} className="sm:w-6 sm:h-6" />
         </div>
         
         <div className="flex-1 min-w-0">
           <p 
-            className="text-sm font-medium mb-1 flex items-center gap-2"
+            className="text-sm font-medium mb-0.5 sm:mb-1 flex items-center gap-2"
             style={{ color: 'var(--color-text)' }}
           >
-            Bienvenue sur mon portfolio ! <Hand size={16} />
+            <Sparkles size={16} className="sm:hidden" style={{ color: 'var(--color-accent)' }} />
+            Bienvenue sur mon portfolio ! <Hand size={14} className="sm:w-4 sm:h-4" />
           </p>
           <p 
             className="text-xs"
             style={{ color: 'var(--color-subtext0)' }}
           >
-            Découvrez comment naviguer et profiter au mieux de toutes les fonctionnalités
+            Découvrez comment naviguer et profiter de toutes les fonctionnalités
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           <button
             onClick={handleOpenGuide}
-            className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105"
+            className="flex-1 sm:flex-none px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 hover:scale-105"
             style={{
               backgroundColor: 'var(--color-accent)',
               color: 'var(--color-base)',
@@ -92,7 +93,7 @@ export default function GuideNotification({ onOpenGuide }: GuideNotificationProp
           
           <button
             onClick={handleClose}
-            className="p-2 rounded-lg transition-all duration-200"
+            className="p-1.5 sm:p-2 rounded-lg transition-all duration-200"
             style={{ color: 'var(--color-subtext0)' }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = 'var(--color-surface0)';

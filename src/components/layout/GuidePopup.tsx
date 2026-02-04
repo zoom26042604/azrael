@@ -75,7 +75,7 @@ const GuidePopup = forwardRef<GuidePopupRef>((props, ref) => {
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center p-4 animate-in fade-in-0 duration-300"
+      className="fixed inset-0 flex items-center justify-center p-2 sm:p-4 animate-in fade-in-0 duration-300"
       style={{ 
         backgroundColor: 'rgba(0, 0, 0, 0.7)',
         backdropFilter: 'blur(8px)',
@@ -85,16 +85,16 @@ const GuidePopup = forwardRef<GuidePopupRef>((props, ref) => {
       onClick={handleClose}
     >
       <div
-        className="relative max-w-2xl w-full rounded-2xl shadow-2xl overflow-hidden"
+        className="relative w-full max-w-[95vw] sm:max-w-lg md:max-w-2xl rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
         style={{
           backgroundColor: 'var(--color-base)',
-          border: '2px solid var(--color-surface1)',
+          border: '1px solid var(--color-surface1)',
         }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div
-          className="p-6 border-b"
+          className="p-4 sm:p-6 border-b shrink-0"
           style={{
             backgroundColor: 'var(--color-surface0)',
             borderColor: 'var(--color-surface1)',
@@ -102,15 +102,15 @@ const GuidePopup = forwardRef<GuidePopupRef>((props, ref) => {
         >
           <div className="flex items-center justify-between">
             <h2
-              className="text-2xl font-bold flex items-center gap-3"
+              className="text-lg sm:text-2xl font-bold flex items-center gap-2 sm:gap-3"
               style={{ color: 'var(--color-text)' }}
             >
-              <Sparkles size={24} style={{ color: 'var(--color-accent)' }} />
+              <Sparkles size={20} className="sm:w-6 sm:h-6" style={{ color: 'var(--color-accent)' }} />
               Guide du Portfolio
             </h2>
             <button
               onClick={handleClose}
-              className="p-2 rounded-lg transition-all duration-200"
+              className="p-1.5 sm:p-2 rounded-lg transition-all duration-200"
               style={{ color: 'var(--color-subtext0)' }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'var(--color-surface1)';
@@ -122,16 +122,16 @@ const GuidePopup = forwardRef<GuidePopupRef>((props, ref) => {
               }}
               aria-label="Fermer"
             >
-              <X size={20} />
+              <X size={18} className="sm:w-5 sm:h-5" />
             </button>
           </div>
         </div>
 
         {/* Content */}
-        <div className="p-8 min-h-[400px] flex flex-col items-center justify-center">
-          <div className="flex flex-col items-center text-center space-y-6 w-full" key={currentStep}>
+        <div className="p-4 sm:p-8 flex-1 overflow-y-auto flex flex-col items-center justify-center min-h-[250px] sm:min-h-[350px]">
+          <div className="flex flex-col items-center text-center space-y-4 sm:space-y-6 w-full" key={currentStep}>
             <div
-              className="p-6 rounded-full transition-all duration-300"
+              className="p-4 sm:p-6 rounded-full transition-all duration-300"
               style={{
                 backgroundColor: 'var(--color-surface0)',
                 color: 'var(--color-accent)',
@@ -140,32 +140,32 @@ const GuidePopup = forwardRef<GuidePopupRef>((props, ref) => {
               {guideSteps[currentStep].icon}
             </div>
 
-            <div className="space-y-4 max-w-lg">
+            <div className="space-y-3 sm:space-y-4 max-w-lg px-2">
               <h3
-                className="text-xl font-semibold"
+                className="text-lg sm:text-xl font-semibold"
                 style={{ color: 'var(--color-text)' }}
               >
                 {guideSteps[currentStep].title}
               </h3>
               <p
-                className="text-base leading-relaxed"
+                className="text-sm sm:text-base leading-relaxed"
                 style={{ color: 'var(--color-subtext0)' }}
               >
                 {guideSteps[currentStep].description}
               </p>
               {guideSteps[currentStep].tip && (
                 <div
-                  className="mt-4 p-4 rounded-lg text-left"
+                  className="mt-3 sm:mt-4 p-3 sm:p-4 rounded-lg text-left"
                   style={{
                     backgroundColor: 'var(--color-surface0)',
                     borderLeft: '3px solid var(--color-accent)',
                   }}
                 >
                   <p
-                    className="text-sm flex items-start gap-2"
+                    className="text-xs sm:text-sm flex items-start gap-2"
                     style={{ color: 'var(--color-subtext0)' }}
                   >
-                    <Lightbulb size={16} style={{ color: 'var(--color-accent)', marginTop: '2px', flexShrink: 0 }} />
+                    <Lightbulb size={14} className="sm:w-4 sm:h-4" style={{ color: 'var(--color-accent)', marginTop: '2px', flexShrink: 0 }} />
                     <span><span style={{ color: 'var(--color-accent)' }} className="font-semibold">Astuce : </span>{guideSteps[currentStep].tip}</span>
                   </p>
                 </div>
@@ -173,18 +173,18 @@ const GuidePopup = forwardRef<GuidePopupRef>((props, ref) => {
             </div>
 
             {/* Progress dots */}
-            <div className="flex justify-center gap-2 mt-8">
+            <div className="flex justify-center gap-1.5 sm:gap-2 mt-4 sm:mt-8">
               {guideSteps.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentStep(index)}
-                  className="h-2 rounded-full transition-all duration-300"
+                  className="h-1.5 sm:h-2 rounded-full transition-all duration-300"
                   style={{
                     backgroundColor:
                       index === currentStep
                         ? 'var(--color-accent)'
                         : 'var(--color-surface1)',
-                    width: index === currentStep ? '32px' : '8px',
+                    width: index === currentStep ? '24px' : '6px',
                   }}
                   onMouseEnter={(e) => {
                     if (index !== currentStep) {
@@ -205,7 +205,7 @@ const GuidePopup = forwardRef<GuidePopupRef>((props, ref) => {
 
         {/* Footer */}
         <div
-          className="p-6 border-t flex justify-between items-center"
+          className="p-4 sm:p-6 border-t flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0 shrink-0"
           style={{ 
             borderColor: 'var(--color-surface1)',
             backgroundColor: 'var(--color-surface0)',
@@ -214,7 +214,7 @@ const GuidePopup = forwardRef<GuidePopupRef>((props, ref) => {
           <button
             onClick={handlePrevious}
             disabled={currentStep === 0}
-            className="px-5 py-2.5 rounded-lg transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed font-medium"
+            className="w-full sm:w-auto px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed font-medium text-sm sm:text-base order-2 sm:order-1"
             style={{
               backgroundColor: 'var(--color-surface1)',
               color: 'var(--color-text)',
@@ -234,7 +234,7 @@ const GuidePopup = forwardRef<GuidePopupRef>((props, ref) => {
           </button>
 
           <span
-            className="text-sm font-semibold"
+            className="text-xs sm:text-sm font-semibold order-1 sm:order-2"
             style={{ color: 'var(--color-subtext0)' }}
           >
             {currentStep + 1} / {guideSteps.length}
@@ -242,13 +242,13 @@ const GuidePopup = forwardRef<GuidePopupRef>((props, ref) => {
 
           <button
             onClick={handleNext}
-            className="px-5 py-2.5 rounded-lg transition-all duration-200 flex items-center gap-2 font-medium"
+            className="w-full sm:w-auto px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 font-medium text-sm sm:text-base order-3"
             style={{
               backgroundColor: 'var(--color-accent)',
               color: 'var(--color-base)',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'scale(1.05)';
+              e.currentTarget.style.transform = 'scale(1.02)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'scale(1)';
@@ -259,7 +259,7 @@ const GuidePopup = forwardRef<GuidePopupRef>((props, ref) => {
             ) : (
               <>
                 Suivant
-                <ArrowRight size={16} />
+                <ArrowRight size={14} className="sm:w-4 sm:h-4" />
               </>
             )}
           </button>

@@ -127,7 +127,7 @@ export default function Experience({ timeline }: ExperienceProps) {
                     onClick={() => setOpenPopover(null)}
                   />
                   <div
-                    className="absolute bottom-full left-1/2 z-30 mb-2 max-w-xs -translate-x-1/2 rounded-xl border p-4 shadow-lg animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-2 duration-200"
+                    className="absolute bottom-full left-1/2 z-30 mb-2 w-80 md:w-96 -translate-x-1/2 rounded-xl border p-4 shadow-lg animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-2 duration-200"
                     style={{
                       borderColor: 'var(--color-surface0)',
                       backgroundColor: 'var(--color-mantle)',

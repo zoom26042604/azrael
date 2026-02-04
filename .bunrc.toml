@@ -1,0 +1,6 @@
+# Bun Runtime Configuration for Azrael
+# This project uses Bun instead of Node.js for faster installation and execution
+
+[install]
+# Enables automatic peer dependency installation
+prefer-workspace = true

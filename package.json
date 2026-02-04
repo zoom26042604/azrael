@@ -2,11 +2,14 @@
   "name": "azrael",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "bun@latest",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generate-images": "bash scripts/generate-project-images.sh",
+    "fetch-image": "bash scripts/fetch-repo-image.sh"
   },
   "dependencies": {
     "@types/leaflet": "^1.9.21",

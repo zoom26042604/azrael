@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next';
 import { projects } from '@/src/data/projects';
 
 function generateSiteMap() {
-  const baseUrl = 'https://nathanferre.dev';
+  const baseUrl = 'https://nathan-ferre.fr';
   
   // Static pages
   const staticPages = [

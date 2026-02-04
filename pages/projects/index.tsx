@@ -9,21 +9,24 @@ export default function ProjectsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTag, setSelectedTag] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'name' | 'date' | 'default'>('default');
-  const [showQuickFilters, setShowQuickFilters] = useState(() => {
-    // Charger l'état depuis localStorage au chargement initial
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('projects-show-quick-filters');
-      return saved !== null ? saved === 'true' : true; // true par défaut
+  const [showQuickFilters, setShowQuickFilters] = useState(true); // Valeur par défaut
+  const [isClient, setIsClient] = useState(false); // Tracker si on est côté client
+
+  // Charger l'état depuis localStorage au montage du composant (côté client uniquement)
+  useEffect(() => {
+    setIsClient(true);
+    const saved = localStorage.getItem('projects-show-quick-filters');
+    if (saved !== null) {
+      setShowQuickFilters(saved === 'true');
     }
-    return true;
-  });
+  }, []);
 
   // Sauvegarder l'état dans localStorage quand il change
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (isClient) {
       localStorage.setItem('projects-show-quick-filters', String(showQuickFilters));
     }
-  }, [showQuickFilters]);
+  }, [showQuickFilters, isClient]);
 
   // Liste des tags qui sont des types de projet (à exclure des filtres rapides)
   const projectTypesTags = ['portfolio', 'ecommerce', 'blog'];
@@ -75,23 +78,25 @@ export default function ProjectsPage() {
   }, [searchQuery, selectedTag, sortBy]);
 
   return (
-    <div className="mx-auto max-w-6xl space-y-8 px-4 py-8 md:px-6">
-      <div className="space-y-4">
-        <h1 className="flex items-center gap-3 text-3xl font-bold fade-in">
-          <Folder size={30} style={{ color: 'var(--color-accent)' }} aria-hidden="true" />
-          <span>{t('projects.title')}</span>
-        </h1>
-        
-        <p 
-          className="text-lg"
-          style={{ color: 'var(--color-subtext0)' }}
-        >
-          {t('projects.description')}
-        </p>
-      </div>
+    <div className="space-y-8 px-4 py-8 md:px-6">
+      {/* Header and Filters - Narrower container */}
+      <div className="mx-auto max-w-5xl space-y-8">
+        <div className="space-y-4">
+          <h1 className="flex items-center gap-3 text-3xl font-bold fade-in">
+            <Folder size={30} style={{ color: 'var(--color-accent)' }} aria-hidden="true" />
+            <span>{t('projects.title')}</span>
+          </h1>
+          
+          <p 
+            className="text-lg"
+            style={{ color: 'var(--color-subtext0)' }}
+          >
+            {t('projects.description')}
+          </p>
+        </div>
 
-      {/* Filter Bar */}
-      <div 
+        {/* Filter Bar */}
+        <div 
         className="rounded-lg border p-4 space-y-4"
         style={{
           backgroundColor: 'var(--color-surface0)',
@@ -251,21 +256,24 @@ export default function ProjectsPage() {
           </div>
         )}
       </div>
+      </div>
 
-      {/* Projects Grid */}
-      <div className="grid gap-6 pt-4 sm:grid-cols-2 lg:grid-cols-3">
-        {filteredProjects.length > 0 ? (
-          filteredProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))
-        ) : (
-          <p 
-            className="col-span-full text-center py-12"
-            style={{ color: 'var(--color-subtext1)' }}
-          >
-            {t('projects.no_results') || 'Aucun projet trouvé pour ce tag'}
-          </p>
-        )}
+      {/* Projects Grid - Wider container */}
+      <div className="mx-auto max-w-screen-2xl">
+        <div className="grid gap-6 pt-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+          {filteredProjects.length > 0 ? (
+            filteredProjects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
+            ))
+          ) : (
+            <p 
+              className="col-span-full text-center py-12"
+              style={{ color: 'var(--color-subtext1)' }}
+            >
+              {t('projects.no_results') || 'Aucun projet trouvé pour ce tag'}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

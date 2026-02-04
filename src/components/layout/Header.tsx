@@ -16,10 +16,11 @@ export default function Header({ toggleSidebar }: HeaderProps) {
   const { t } = useLanguage();
   
   const mainNavItems = useMemo(() => [
+    { title: t('nav.home'), href: '/' },
     { title: t('nav.about'), href: '/about' },
     { title: t('nav.projects'), href: '/projects' },
     { title: t('nav.contact'), href: '/contact' },
-    { title: t('nav.resume'), href: '/resume.pdf', external: true }
+    { title: t('nav.resume'), href: '/cv' }
   ], [t]);
 
   const handleButtonMouseEnter: ButtonMouseHandler = useCallback((e) => {
@@ -45,14 +46,15 @@ export default function Header({ toggleSidebar }: HeaderProps) {
   }), []);
 
   return (
-    <div 
+    <header 
       className="header sticky top-0 z-10 flex h-24 items-center justify-between p-5 pb-10 select-none"
       style={headerStyle}
+      role="banner"
     >
       <Breadcrumb />
       <button
         onClick={toggleSidebar}
-        className="rounded p-2 md:hidden"
+        className="rounded p-2 lg:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
         style={{ color: 'var(--color-text)' }}
         onMouseEnter={handleButtonMouseEnter}
         onMouseLeave={handleButtonMouseLeave}
@@ -60,9 +62,9 @@ export default function Header({ toggleSidebar }: HeaderProps) {
         aria-expanded="false"
         aria-controls="sidebar-nav"
       >
-        <Menu size={24} />
+        <Menu size={24} aria-hidden="true" />
       </button>
-      <nav className="hidden items-center space-x-4 md:flex">
+      <nav className="hidden items-center space-x-4 lg:flex" role="navigation" aria-label="Main navigation">
         {mainNavItems.map((item) => (
           <a
             key={item.title}
@@ -90,6 +92,6 @@ export default function Header({ toggleSidebar }: HeaderProps) {
           {t('nav.more')}...
         </button>
       </nav>
-    </div>
+    </header>
   );
 }

@@ -1,11 +1,11 @@
-import { useMemo } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Calendar, ExternalLink, Github } from 'lucide-react';
-import { Project } from '@/src/types';
-import { getTagColor } from '@/src/lib/tagColors';
-import { useLanguage } from '@/src/contexts/LanguageContext';
-import { getProjectTranslation } from '@/src/data/projectTranslations';
+import { useMemo } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Calendar, ExternalLink, Github, Tag } from "lucide-react";
+import { Project } from "@/src/types";
+import { getTagColor } from "@/src/lib/tagColors";
+import { useLanguage } from "@/src/contexts/LanguageContext";
+import { getProjectTranslation } from "@/src/data/projectTranslations";
 
 interface ProjectCardProps {
   project: Project;
@@ -15,123 +15,109 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const { language } = useLanguage();
 
   // Get translated content
-  const translatedContent = useMemo(() => 
-    getProjectTranslation(project.slug, language),
+  const translatedContent = useMemo(
+    () => getProjectTranslation(project.slug, language),
     [project.slug, language]
   );
 
   const title = translatedContent?.title || project.title;
   const description = translatedContent?.description || project.description;
 
-  const imageContainerStyle = useMemo(() => ({ 
-    backgroundColor: 'var(--color-surface0)',
-    transition: 'transform 0.3s ease',
-    viewTransitionName: `project-img-${project.slug}`
-  } as React.CSSProperties), [project.slug]);
-
   return (
     <Link 
-      href={`/projects/${project.slug}`}
-      className="group block"
+      href={`/projects/${project.slug}`} 
+      className="group block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded-xl"
+      aria-label={`${title} - ${description}`}
     >
-      <article 
-        className="flex h-full flex-col overflow-hidden rounded-xl border transition-all duration-200"
-        style={{ 
-          borderColor: 'var(--color-surface0)',
-          backgroundColor: 'var(--color-mantle)'
+      <article
+        className="flex h-full flex-col overflow-hidden rounded-xl border shadow-lg transition-all duration-300 hover:shadow-xl"
+        style={{
+          borderColor: "var(--color-surface0)",
+          backgroundColor: "var(--color-mantle)",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = 'var(--color-accent)';
+          e.currentTarget.style.borderColor = "var(--color-accent)";
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = 'var(--color-surface0)';
+          e.currentTarget.style.borderColor = "var(--color-surface0)";
         }}
       >
         {/* Image */}
-        <div 
-          className="relative h-48 overflow-hidden flex items-center justify-center"
-          style={imageContainerStyle}
-        >
-          {project.image ? (
-            <Image 
+        {project.image ? (
+          <div
+            className="relative aspect-[2/1] w-full overflow-hidden"
+            style={{
+              viewTransitionName: `project-img-${project.slug}`,
+            } as React.CSSProperties}
+          >
+            <Image
               src={project.image}
               alt={title}
               fill
               loading="lazy"
-              className="object-cover"
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
               onError={(e) => {
-                e.currentTarget.style.display = 'none';
+                e.currentTarget.style.display = "none";
                 const parent = e.currentTarget.parentElement;
                 if (parent) {
-                  parent.innerHTML = '<div class="flex flex-col items-center justify-center gap-2"><div style="font-size: 2.5rem; color: var(--color-overlay0)">📁</div><span class="text-xs" style="color: var(--color-subtext0)">Image non trouvée</span></div>';
+                  parent.style.backgroundColor = "var(--color-surface2)";
                 }
               }}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
-          ) : (
-            <div className="flex flex-col items-center justify-center gap-2">
-              <div style={{ fontSize: '2.5rem', color: 'var(--color-overlay0)' }}>📁</div>
-              <span className="text-xs" style={{ color: 'var(--color-subtext0)' }}>
-                Pas d&apos;image
-              </span>
-            </div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <div
+            className="aspect-[2/1] w-full overflow-hidden"
+            style={{
+              backgroundColor: "var(--color-surface2)",
+              viewTransitionName: `project-img-${project.slug}`,
+            } as React.CSSProperties}
+          />
+        )}
 
-        {/* Content */}
-        <div className="flex flex-1 flex-col p-6">
-          <h3 
-            className="mb-2 text-xl font-semibold"
-            style={{ 
-              color: 'var(--color-text)',
-              viewTransitionName: `project-title-${project.slug}`
+        {/* Contenu - padding réduit */}
+        <div className="space-y-2 p-4">
+          {/* Title - taille réduite */}
+          <h3
+            className="text-base sm:text-lg font-semibold transition-colors group-hover:text-accent line-clamp-1"
+            style={{
+              color: "var(--color-text)",
+              viewTransitionName: `project-title-${project.slug}`,
             } as React.CSSProperties}
           >
             {title}
           </h3>
 
-          <p 
-            className="mb-4 flex-1 text-sm"
-            style={{ color: 'var(--color-subtext0)' }}
+          {/* Description - plus visible comme nyx */}
+          <p
+            className="line-clamp-3 text-sm"
+            style={{ color: "var(--color-subtext0)" }}
           >
             {description}
           </p>
 
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2 mb-4">
-            {project.tags.slice(0, 4).map((tag) => {
-              const tagColor = getTagColor(tag, project.slug);
-              const style = tagColor.type === 'hex' 
-                ? { backgroundColor: 'var(--color-surface0)', color: tagColor.color }
-                : { backgroundColor: 'var(--color-surface0)', color: `var(--color-${tagColor.color})` };
-              
-              return (
-                <span
-                  key={tag}
-                  className="rounded px-2 py-1 text-xs font-semibold"
-                  style={style}
-                >
-                  {tag}
-                </span>
-              );
-            })}
-          </div>
+          {/* Tags - même style que Featured */}
+          {project.tags && project.tags.length > 0 && (
+            <div className="flex flex-wrap items-center gap-2 pt-1">
+              {project.tags.map((tag) => {
+                const tagColor = getTagColor(tag, project.slug);
+                const style = tagColor.type === 'hex' 
+                  ? { backgroundColor: 'var(--color-surface0)', color: tagColor.color }
+                  : { backgroundColor: 'var(--color-surface0)', color: `var(--color-${tagColor.color})` };
 
-          {/* Footer */}
-          <div className="flex items-center justify-between text-xs" style={{ color: 'var(--color-subtext1)' }}>
-            <span className="flex items-center gap-1">
-              <Calendar size={14} />
-              {project.date}
-            </span>
-            <div className="flex gap-2">
-              {project.github && (
-                <Github size={14} />
-              )}
-              {project.demo && (
-                <ExternalLink size={14} />
-              )}
+                return (
+                  <span
+                    key={tag}
+                    className="rounded-full px-2.5 py-0.5 text-xs font-semibold"
+                    style={style}
+                  >
+                    {tag}
+                  </span>
+                );
+              })}
             </div>
-          </div>
+          )}
         </div>
       </article>
     </Link>

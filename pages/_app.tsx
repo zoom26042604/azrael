@@ -67,13 +67,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <ThemeProvider>
         <Head>
           <title>Nathan FERRE</title>
-          <meta name="description" content="Portfolio personnel - Développeur Junior" />
+          <meta name="description" content="Portfolio personnel - Etudiant en Informatique" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-          <link 
-            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" 
-            rel="stylesheet" 
-          />
           <style dangerouslySetInnerHTML={{ __html: VIEW_TRANSITION_STYLES }} />
         </Head>
         <a 

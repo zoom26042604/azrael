@@ -17,7 +17,7 @@ export default function HeadMeta({
   keywords = [],
   type = 'website'
 }: HeadMetaProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://nathanferre.dev';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://nathan-ferre.fr';
   const fullUrl = `${baseUrl}${path}`;
   const fullImageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
   const fullTitle = title.includes('Nathan FERRE') ? title : `${title} | Nathan FERRE`;

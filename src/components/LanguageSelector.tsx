@@ -4,9 +4,8 @@ import { Languages } from 'lucide-react';
 import { useLanguage } from '@/src/contexts/LanguageContext';
 
 const languages = [
-  { code: 'fr' as const, label: 'Français', flag: '🇫🇷' },
-  { code: 'en' as const, label: 'English', flag: '🇬🇧' },
-  { code: 'ko' as const, label: '한국어', flag: '🇰🇷' }
+  { code: 'fr' as const, label: 'FR', flag: '🇫🇷' },
+  { code: 'en' as const, label: 'EN', flag: '🇬🇧' },
 ];
 
 export default function LanguageSelector() {
@@ -31,6 +30,8 @@ export default function LanguageSelector() {
             <button
               key={lang.code}
               onClick={() => setLanguage(lang.code)}
+              aria-label={`Changer la langue en ${lang.label}`}
+              aria-pressed={isSelected}
               className={`flex-1 cursor-pointer rounded-[5px] px-2 py-1 text-center text-xs font-medium transition-all duration-300 ${
                 isSelected ? 'shadow-sm ring-1 ring-inset' : ''
               }`}
@@ -49,10 +50,8 @@ export default function LanguageSelector() {
                   e.currentTarget.style.color = 'var(--color-subtext1)';
                 }
               }}
-              title={lang.label}
             >
-              <span className="mr-1">{lang.flag}</span>
-              {lang.code.toUpperCase()}
+              {lang.flag} {lang.label}
             </button>
           );
         })}

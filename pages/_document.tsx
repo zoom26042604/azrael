@@ -11,14 +11,14 @@ export default function Document() {
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://nathanferre.dev/" />
+        <meta property="og:url" content="https://nathan-ferre.fr/" />
         <meta property="og:title" content="Nathan FERRE - Développeur Full-Stack" />
         <meta property="og:description" content="Portfolio de Nathan FERRE, développeur Full-Stack passionné. Découvrez mes projets et expériences." />
         <meta property="og:image" content="/og-image.png" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://nathanferre.dev/" />
+        <meta name="twitter:url" content="https://nathan-ferre.fr/" />
         <meta name="twitter:title" content="Nathan FERRE - Développeur Full-Stack" />
         <meta name="twitter:description" content="Portfolio de Nathan FERRE, développeur Full-Stack passionné." />
         <meta name="twitter:image" content="/og-image.png" />
@@ -40,7 +40,7 @@ export default function Document() {
         <meta name="apple-mobile-web-app-title" content="Nathan FERRE" />
         
         {/* Canonical URL */}
-        <link rel="canonical" href="https://nathanferre.dev/" />
+        <link rel="canonical" href="https://nathan-ferre.fr/" />
       </Head>
       <body suppressHydrationWarning>
         <Main />

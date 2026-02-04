@@ -2,13 +2,11 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Globe } from 'lucide-react';
 import { useLanguage } from '@/src/contexts/LanguageContext';
 
 const languages = [
   { code: 'fr' as const, label: 'Français', flag: '🇫🇷' },
   { code: 'en' as const, label: 'English', flag: '🇬🇧' },
-  { code: 'ko' as const, label: '한국어', flag: '🇰🇷' },
 ];
 
 export default function LanguageSwitcher() {
@@ -43,7 +41,7 @@ export default function LanguageSwitcher() {
       <button
         ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all"
+        className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-sm"
         aria-label="Sélecteur de langue"
         aria-expanded={isOpen}
         style={{
@@ -58,9 +56,8 @@ export default function LanguageSwitcher() {
           if (!isOpen) e.currentTarget.style.backgroundColor = 'transparent';
         }}
       >
-        <Globe size={18} />
-        <span className="hidden sm:inline">{currentLanguage.flag}</span>
-        <span className="text-sm hidden md:inline">{currentLanguage.code.toUpperCase()}</span>
+        <span>{currentLanguage.flag}</span>
+        <span className="hidden sm:inline">{currentLanguage.code.toUpperCase()}</span>
       </button>
 
       {isOpen && buttonRect && createPortal(

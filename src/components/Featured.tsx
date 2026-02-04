@@ -20,7 +20,7 @@ function FeaturedImage({ src, alt, slug }: { src: string | undefined | null; alt
 
   return (
     <div 
-      className="relative h-48 overflow-hidden flex items-center justify-center"
+      className="relative aspect-[2/1] w-full overflow-hidden"
       style={containerStyle}
     >
       {src && !hasError ? (
@@ -28,7 +28,7 @@ function FeaturedImage({ src, alt, slug }: { src: string | undefined | null; alt
           src={src}
           alt={alt}
           fill
-          className="object-cover"
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
           onError={() => setHasError(true)}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
@@ -84,7 +84,7 @@ export default function Featured({ projects, maxProjects }: FeaturedProps) {
             <span>{t('featured.title')}</span>
           </h2>
         </div>
-        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
           {[1, 2].map(i => (
             <div 
               key={i}
@@ -94,8 +94,8 @@ export default function Featured({ projects, maxProjects }: FeaturedProps) {
                 border: '1px solid var(--color-surface1)'
               }}
             >
-              <div className="h-48" style={{ backgroundColor: 'var(--color-surface1)' }} />
-              <div className="p-6 space-y-3">
+              <div className="aspect-video w-full" style={{ backgroundColor: 'var(--color-surface1)' }} />
+              <div className="p-5 space-y-3">
                 <div className="h-6 rounded" style={{ backgroundColor: 'var(--color-surface1)', width: '60%' }} />
                 <div className="h-4 rounded" style={{ backgroundColor: 'var(--color-surface1)', width: '100%' }} />
                 <div className="h-4 rounded" style={{ backgroundColor: 'var(--color-surface1)', width: '80%' }} />
@@ -112,23 +112,23 @@ export default function Featured({ projects, maxProjects }: FeaturedProps) {
   }
 
   return (
-    <section className="px-4 py-8 md:px-0">
+    <section className="px-4 py-8 md:px-0" aria-labelledby="featured-projects-title">
       <div className="mb-8 flex items-center justify-between">
-        <h2 className="flex items-center gap-3 text-2xl font-semibold md:text-3xl" style={{ color: 'var(--color-text)' }}>
-          <Star size={28} style={{ color: 'var(--color-accent)' }} />
+        <h2 id="featured-projects-title" className="flex items-center gap-3 text-2xl font-semibold md:text-3xl" style={{ color: 'var(--color-text)' }}>
+          <Star size={28} style={{ color: 'var(--color-accent)' }} aria-hidden="true" />
           <span>{t('featured.title')}</span>
         </h2>
-        <Link
+        <a
           href="/projects"
-          className="group hidden items-center gap-1 text-sm sm:inline-flex"
-          style={{ color: 'color-mix(in srgb, var(--color-accent) 90%, transparent)' }}
+          className="link hidden sm:inline-flex items-center gap-1 text-sm"
         >
-          <span>{t('featured.view_all')}</span>
+          {t('featured.view_all')}
           <ArrowRight
             size={14}
             className="transition-transform duration-200 group-hover:translate-x-0.5"
+            aria-hidden="true"
           />
-        </Link>
+        </a>
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -136,11 +136,12 @@ export default function Featured({ projects, maxProjects }: FeaturedProps) {
           <Link
             key={project.slug}
             href={`/projects/${project.slug}`}
-            className="group block overflow-hidden rounded-xl border shadow-lg transition-all duration-300 hover:shadow-xl focus:outline-none"
+            className="group block overflow-hidden rounded-xl border shadow-lg transition-all duration-300 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
             style={{
               borderColor: 'var(--color-surface0)',
               backgroundColor: 'var(--color-mantle)'
             }}
+            aria-label={`${project.metadata.title} - ${project.metadata.description}`}
             onMouseEnter={(e) => {
               e.currentTarget.style.borderColor = 'var(--color-accent)';
             }}
@@ -194,17 +195,17 @@ export default function Featured({ projects, maxProjects }: FeaturedProps) {
       </div>
 
       <div className="mt-6 text-center sm:hidden">
-        <Link
+        <a
           href="/projects"
-          className="group inline-flex items-center gap-1 text-sm hover:underline"
-          style={{ color: 'var(--color-accent)' }}
+          className="link inline-flex items-center gap-1 text-sm"
         >
-          <span>{t('featured.view_all')}</span>
+          {t('featured.view_all')}
           <ArrowRight
             size={14}
             className="transition-transform duration-200 group-hover:translate-x-0.5"
+            aria-hidden="true"
           />
-        </Link>
+        </a>
       </div>
     </section>
   );

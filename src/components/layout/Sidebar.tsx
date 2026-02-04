@@ -28,12 +28,13 @@ export default function Sidebar({ isOpen, closeSidebar, openGuide }: SidebarProp
     { title: t('nav.about'), href: '/about' },
     { title: t('nav.projects'), href: '/projects' },
     { title: t('nav.contact'), href: '/contact' },
-    { title: t('nav.resume'), href: '/resume.pdf', external: true }
+    { title: t('nav.resume'), href: '/cv' },
+    { title: t('nav.socials'), href: '/socials' }
   ], [t]);
 
   const moreNavItems = useMemo(() => [
-    { title: t('nav.socials'), href: '/socials' }
-  ], [t]);
+    { title: '2048 Game', href: 'http://localhost:3001', external: true }
+  ], []);
 
   return (
     <>
@@ -58,6 +59,9 @@ export default function Sidebar({ isOpen, closeSidebar, openGuide }: SidebarProp
           borderColor: 'var(--color-surface0)'
         }}
         id="sidebar-nav"
+        tabIndex={-1}
+        aria-hidden={!isOpen}
+        {...(!isOpen && { inert: true })}
       >
         <div 
           className="flex h-16 shrink-0 items-center justify-between border-b p-4"
@@ -76,6 +80,7 @@ export default function Sidebar({ isOpen, closeSidebar, openGuide }: SidebarProp
             onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-red)'}
             onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-subtext1)'}
             aria-label="Close navigation menu"
+            tabIndex={isOpen ? 0 : -1}
           >
             <X size={24} />
           </button>
@@ -103,6 +108,7 @@ export default function Sidebar({ isOpen, closeSidebar, openGuide }: SidebarProp
                     style={{
                       backgroundColor: isActive ? 'var(--color-surface0)' : 'transparent'
                     }}
+                    tabIndex={isOpen ? 0 : -1}
                     onMouseEnter={(e) => {
                       if (!isActive) e.currentTarget.style.backgroundColor = 'var(--color-surface0)';
                     }}
@@ -149,6 +155,7 @@ export default function Sidebar({ isOpen, closeSidebar, openGuide }: SidebarProp
                     style={{
                       backgroundColor: isActive ? 'var(--color-surface0)' : 'transparent'
                     }}
+                    tabIndex={isOpen ? 0 : -1}
                     onMouseEnter={(e) => {
                       if (!isActive) e.currentTarget.style.backgroundColor = 'var(--color-surface0)';
                     }}
@@ -182,6 +189,7 @@ export default function Sidebar({ isOpen, closeSidebar, openGuide }: SidebarProp
               backgroundColor: 'var(--color-surface0)',
               color: 'var(--color-text)',
             }}
+            tabIndex={isOpen ? 0 : -1}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = 'var(--color-surface1)';
               e.currentTarget.style.color = 'var(--color-accent)';

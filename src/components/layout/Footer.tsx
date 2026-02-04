@@ -6,9 +6,24 @@ import { Clock, GitCommit, Github, Linkedin } from 'lucide-react';
 const year = new Date().getFullYear();
 const commitSha = process.env.NEXT_PUBLIC_COMMIT_SHA || 'dev';
 const shortSha = commitSha.substring(0, 7);
-const commitLinkUrl = commitSha !== 'dev' 
-  ? `https://github.com/zoom26042604/azrael/commit/${commitSha}` 
-  : '#';
+
+// Determine the environment-based link URL
+const getCommitLinkUrl = () => {
+  if (commitSha !== 'dev') {
+    // Production: link to the specific commit
+    return `https://github.com/zoom26042604/azrael/commit/${commitSha}`;
+  }
+  
+  // Development: determine the current branch
+  const currentBranch = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || 
+                       process.env.VERCEL_GIT_COMMIT_REF || 
+                       'dev';
+  
+  // Link to the branch on GitHub
+  return `https://github.com/zoom26042604/azrael/tree/${currentBranch}`;
+};
+
+const commitLinkUrl = getCommitLinkUrl();
 
 export default function Footer() {
   const [timeOnSite, setTimeOnSite] = useState('00:00');

@@ -1,4 +1,5 @@
 // Panel de couleurs vives et joyeuses pour attribution aléatoire
+// Les couleurs ont été choisies pour assurer un contraste WCAG AA minimum sur fond sombre
 const COLOR_PALETTE = [
   '#00D9FF', // Cyan vif
   '#61DAFB', // Cyan clair
@@ -52,6 +53,21 @@ const COLOR_PALETTE = [
   '#68217A', // Violet C#
 ];
 
+// Fonction pour déterminer si on doit utiliser du texte blanc ou noir pour un meilleur contraste
+function shouldUseWhiteText(hexColor: string): boolean {
+  // Convertir hex en RGB
+  const hex = hexColor.replace('#', '');
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+
+  // Calculer la luminance relative (WCAG formula)
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+  // Si la couleur est trop claire (luminance > 0.5), utiliser du texte noir
+  return luminance < 0.5;
+}
+
 // Fonction de hash pour générer une couleur cohérente basée sur le nom du tag ET du projet
 function hashString(str: string): number {
   let hash = 0;
@@ -66,10 +82,11 @@ function hashString(str: string): number {
 /**
  * Obtient une couleur aléatoire pour un tag dans le contexte d'un projet spécifique.
  * La même techno aura des couleurs différentes sur différents projets.
+ * Assure le contraste WCAG AA pour l'accessibilité.
  * @param tag - Le nom de la technologie
  * @param projectSlug - Le slug du projet (optionnel, utilisé pour varier les couleurs par projet)
  */
-export function getTagColor(tag: string, projectSlug?: string): { type: 'hex' | 'catppuccin'; color: string } {
+export function getTagColor(tag: string, projectSlug?: string): { type: 'hex' | 'catppuccin'; color: string; backgroundColor: string; textColor: 'white' | 'black' } {
   const normalizedTag = tag.toLowerCase().trim();
   
   // Combiner le tag avec le projet pour générer une couleur unique par projet
@@ -77,6 +94,7 @@ export function getTagColor(tag: string, projectSlug?: string): { type: 'hex' | 
   const hash = hashString(seed);
   const colorIndex = hash % COLOR_PALETTE.length;
   const color = COLOR_PALETTE[colorIndex];
+  const textColor = shouldUseWhiteText(color) ? 'white' : 'black';
   
-  return { type: 'hex', color };
+  return { type: 'hex', color, backgroundColor: color, textColor };
 }
