@@ -32,6 +32,7 @@ export default async function handler(
     }
 
     // Send email using Resend
+    console.log('Attempting to send email with Resend...');
     const { data, error } = await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>',
       to: ['nathanferrepro@gmail.com'],
@@ -128,9 +129,10 @@ export default async function handler(
 
     if (error) {
       console.error('Resend error:', error);
-      return res.status(500).json({ error: 'Failed to send email' });
+      return res.status(500).json({ error: 'Failed to send email', details: error });
     }
 
+    console.log('Email sent successfully:', data);
     return res.status(200).json({ success: true, data });
   } catch (error) {
     console.error('Contact API error:', error);
