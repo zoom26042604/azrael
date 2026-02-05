@@ -78,22 +78,10 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`View version ${version} on GitHub`}
-            className="flex items-center gap-1.5 transition-colors duration-200 rounded px-2 py-0.5"
-            style={{ 
-              color: 'var(--color-subtext1)',
-              backgroundColor: 'color-mix(in srgb, var(--color-surface0) 50%, transparent)',
-              border: '1px solid color-mix(in srgb, var(--color-surface0) 30%, transparent)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = 'var(--color-accent)';
-              e.currentTarget.style.backgroundColor = 'color-mix(in srgb, var(--color-surface0) 80%, transparent)';
-              e.currentTarget.style.borderColor = 'color-mix(in srgb, var(--color-accent) 30%, transparent)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = 'var(--color-subtext1)';
-              e.currentTarget.style.backgroundColor = 'color-mix(in srgb, var(--color-surface0) 50%, transparent)';
-              e.currentTarget.style.borderColor = 'color-mix(in srgb, var(--color-surface0) 30%, transparent)';
-            }}
+            className="flex items-center gap-1 transition-colors duration-200 rounded"
+            style={{ color: 'var(--color-subtext1)' }}
+            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
+            onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-subtext1)'}
           >
             <Github size={14} aria-hidden="true" />
             <span className="font-mono text-xs">v{version}</span>
