@@ -33,7 +33,7 @@ export default function Sidebar({ isOpen, closeSidebar, openGuide }: SidebarProp
   ], [t]);
 
   const moreNavItems = useMemo(() => [
-    { title: '2048 Game', href: 'http://localhost:3001', external: true }
+    { title: '2048 Game', href: 'https://2048.zoom2604.dev', external: true }
   ], []);
 
   return (

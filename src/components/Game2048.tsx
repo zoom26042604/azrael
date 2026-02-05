@@ -5,7 +5,7 @@ import { ExternalLink, AlertCircle, RefreshCw, Github } from 'lucide-react';
 import { useLanguage } from '@/src/contexts/LanguageContext';
 
 // URL du jeu 2048 hébergé (à changer en production)
-const GAME_URL = process.env.NEXT_PUBLIC_GAME_2048_URL || 'http://localhost:3001';
+const GAME_URL = process.env.NEXT_PUBLIC_GAME_2048_URL || 'https://2048.zoom2604.dev/embed';
 
 const LOAD_TIMEOUT = 8000; // 8 secondes timeout
 
