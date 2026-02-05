@@ -4,6 +4,9 @@ export default function Document() {
   return (
     <Html lang="fr" data-scroll-behavior="smooth">
       <Head>
+        {/* Preload critical assets */}
+        <link rel="preload" href="/favicon.ico" as="image" type="image/x-icon" />
+        
         {/* SEO Meta Tags */}
         <meta name="description" content="Nathan FERRE - Développeur Full-Stack passionné. Portfolio avec projets web, expériences et compétences techniques." />
         <meta name="keywords" content="Nathan FERRE, développeur, full-stack, portfolio, web, Next.js, React, TypeScript" />

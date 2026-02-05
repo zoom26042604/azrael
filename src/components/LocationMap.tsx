@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { MapPin, Sun, Moon } from 'lucide-react';
 import { useLanguage } from '@/src/contexts/LanguageContext';
 
-// Toulouse coordinates
+// Coordonnées de Toulouse
 const TOULOUSE_COORDS: [number, number] = [43.6045, 1.4442];
 const DEFAULT_ZOOM = 12;
 
@@ -64,7 +64,7 @@ const LocationMap = memo(function LocationMap() {
           touchZoom: false
         }).setView(TOULOUSE_COORDS, DEFAULT_ZOOM);
 
-        // Add dark theme tiles
+        // Ajouter les tuiles du thème sombre
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
           maxZoom: 19,
           attribution: '',

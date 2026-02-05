@@ -1,5 +1,6 @@
 import type { ReactNode, CSSProperties } from 'react';
 import { useScrollAnimation } from '@/src/hooks/useScrollAnimation';
+import { memo, useMemo } from 'react';
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -27,7 +28,7 @@ const animations: Record<string, { initial: CSSProperties; animate: CSSPropertie
   }
 };
 
-export default function AnimatedSection({
+const AnimatedSection = memo(function AnimatedSection({
   children,
   className = '',
   animation = 'fade-up',
@@ -36,14 +37,17 @@ export default function AnimatedSection({
   const [ref, isVisible] = useScrollAnimation({ threshold: 0.1, triggerOnce: true });
 
   const animationConfig = animations[animation];
-  const style: CSSProperties = {
+  const style: CSSProperties = useMemo(() => ({
     transition: `opacity 0.6s ease-out ${delay}ms, transform 0.6s ease-out ${delay}ms`,
+    willChange: isVisible ? 'auto' : 'opacity, transform',
     ...(isVisible ? animationConfig.animate : animationConfig.initial)
-  };
+  }), [isVisible, delay, animationConfig]);
 
   return (
     <div ref={ref} className={className} style={style}>
       {children}
     </div>
   );
-}
+});
+
+export default AnimatedSection;

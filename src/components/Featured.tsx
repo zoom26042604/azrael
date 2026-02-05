@@ -20,7 +20,7 @@ function FeaturedImage({ src, slug }: { src: string | undefined | null; slug: st
 
   return (
     <div 
-      className="relative aspect-[2/1] w-full overflow-hidden"
+      className="relative aspect-2/1 w-full overflow-hidden"
       style={containerStyle}
     >
       {src && !hasError ? (

@@ -1,9 +1,7 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Calendar, ExternalLink, Github, Tag } from "lucide-react";
 import { Project } from "@/src/types";
-import { getTagColor } from "@/src/lib/tagColors";
 import { useLanguage } from "@/src/contexts/LanguageContext";
 import { getProjectTranslation } from "@/src/data/projectTranslations";
 
@@ -45,7 +43,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {/* Image */}
         {project.image ? (
           <div
-            className="relative aspect-[2/1] w-full overflow-hidden"
+            className="relative aspect-2/1 w-full overflow-hidden"
             style={{
               viewTransitionName: `project-img-${project.slug}`,
             } as React.CSSProperties}
@@ -68,7 +66,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         ) : (
           <div
-            className="aspect-[2/1] w-full overflow-hidden"
+            className="aspect-2/1 w-full overflow-hidden"
             style={{
               backgroundColor: "var(--color-surface2)",
               viewTransitionName: `project-img-${project.slug}`,

@@ -2,9 +2,6 @@ import { useMemo } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { Github, Linkedin, Mail, ArrowRight } from "lucide-react";
-import Featured from "@/src/components/Featured";
-import Experience from "@/src/components/Experience";
-import AnimatedSection from "@/src/components/AnimatedSection";
 import HeadMeta from "@/src/components/HeadMeta";
 import { featuredProjects } from "@/src/data/projects";
 import { experienceTimeline } from "@/src/data/experience";
@@ -12,7 +9,19 @@ import { FeaturedProject } from "@/src/types";
 import { useLanguage } from "@/src/contexts/LanguageContext";
 import { getProjectTranslation } from "@/src/data/projectTranslations";
 
-// Dynamic imports pour les composants lourds
+// Dynamic imports pour les composants lourds et non critiques
+const Featured = dynamic(() => import("@/src/components/Featured"), {
+  loading: () => <div className="h-64" />
+});
+
+const Experience = dynamic(() => import("@/src/components/Experience"), {
+  loading: () => <div className="h-32" />
+});
+
+const AnimatedSection = dynamic(() => import("@/src/components/AnimatedSection"), {
+  loading: () => <div />
+});
+
 const LocationMap = dynamic(() => import("@/src/components/LocationMap"), {
   ssr: false,
   loading: () => (

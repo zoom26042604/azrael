@@ -22,7 +22,7 @@ export default function Timeline({ items }: TimelineProps) {
 
   return (
     <div className="relative space-y-8">
-      {/* Vertical line */}
+      {/* Ligne verticale */}
       <div
         className="absolute left-4 top-0 bottom-0 w-0.5"
         style={{ backgroundColor: 'var(--color-surface1)' }}
