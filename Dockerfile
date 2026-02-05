@@ -1,27 +1,30 @@
 # ================================
 # STAGE 1: Dependencies
 # ================================
-FROM node:22-alpine AS deps
+FROM oven/bun:1 AS deps
 WORKDIR /app
 
 # Install dependencies
-COPY package.json package-lock.json* ./
-RUN npm ci --omit=dev
+COPY package.json bun.lockb* ./
+RUN bun install --frozen-lockfile --production
 
 # ================================
 # STAGE 2: Builder
 # ================================
-FROM node:22-alpine AS builder
+FROM oven/bun:1 AS builder
 WORKDIR /app
 
 # Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Install all dependencies including devDependencies
+RUN bun install --frozen-lockfile
+
 # Build Next.js application
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
-RUN npm run build
+RUN bun run build
 
 # ================================
 # STAGE 3: Runner (Production)
