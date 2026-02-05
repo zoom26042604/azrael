@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 import withPWA from '@ducanh2912/next-pwa';
 
 const nextConfig: NextConfig = {
+  basePath: '/portfolio',
   output: 'standalone', // Required for Docker deployment
   images: {
     formats: ['image/avif', 'image/webp'],
