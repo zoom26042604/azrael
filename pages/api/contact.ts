@@ -35,7 +35,7 @@ export default async function handler(
     console.log('Attempting to send email with Resend...');
     const { data, error } = await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>',
-      to: ['nathanferrepro@gmail.com'],
+      to: ['nathan.ferre@ynov.com'],  // Resend free tier only allows sending to verified email
       replyTo: email,
       subject: `[Portfolio] ${subject}`,
       html: `
