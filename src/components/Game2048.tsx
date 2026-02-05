@@ -6,6 +6,7 @@ import { useLanguage } from '@/src/contexts/LanguageContext';
 
 // URL du jeu 2048 hébergé (à changer en production)
 const GAME_URL = process.env.NEXT_PUBLIC_GAME_2048_URL || 'https://2048.zoom2604.dev/embed';
+const GAME_FULL_URL = 'https://2048.zoom2604.dev';
 
 const LOAD_TIMEOUT = 8000; // 8 secondes timeout
 
@@ -151,7 +152,7 @@ const Game2048 = () => {
           
           <iframe
             key={iframeKey}
-            src={`${GAME_URL}/embed`}
+            src={`${GAME_URL}`}
             className="w-full h-full border-0"
             style={{ 
               minHeight: '420px',
@@ -171,7 +172,7 @@ const Game2048 = () => {
           style={{ borderColor: 'var(--color-surface0)' }}
         >
           <a
-            href={GAME_URL}
+            href={GAME_FULL_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors w-full"
