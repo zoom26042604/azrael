@@ -4,9 +4,6 @@ export default function Document() {
   return (
     <Html lang="fr" data-scroll-behavior="smooth">
       <Head>
-        {/* Preload critical assets */}
-        <link rel="preload" href="/favicon.ico" as="image" type="image/x-icon" />
-        
         {/* SEO Meta Tags */}
         <meta name="description" content="Nathan FERRE - Développeur Full-Stack passionné. Portfolio avec projets web, expériences et compétences techniques." />
         <meta name="keywords" content="Nathan FERRE, développeur, full-stack, portfolio, web, Next.js, React, TypeScript" />
@@ -27,10 +24,8 @@ export default function Document() {
         <meta name="twitter:image" content="/og-image.png" />
         
         {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
