@@ -162,7 +162,7 @@ export default function ProjectsPage() {
             onClick={() => setShowQuickFilters(!showQuickFilters)}
             aria-label={showQuickFilters ? t('projects.hide_filters') : t('projects.show_filters')}
             aria-expanded={showQuickFilters}
-            className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide transition-colors w-fit"
+            className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide transition-colors w-fit focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2 rounded"
             style={{ color: 'var(--color-subtext1)' }}
             onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
             onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-subtext1)'}
@@ -177,7 +177,7 @@ export default function ProjectsPage() {
                 onClick={() => setSelectedTag('all')}
                 aria-label={`${t('projects.all_projects')} (${projects.length})`}
                 aria-pressed={selectedTag === 'all'}
-                className="rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200"
+                className="rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2"
                 style={{
                   backgroundColor: selectedTag === 'all' ? 'var(--color-accent)' : 'var(--color-surface1)',
                   color: selectedTag === 'all' ? 'var(--color-base)' : 'var(--color-text)',
@@ -205,7 +205,7 @@ export default function ProjectsPage() {
                     onClick={() => setSelectedTag(tag)}
                     aria-label={`${t('projects.filter_by')} ${tag} (${count} ${t('projects.results_found')})`}
                     aria-pressed={isSelected}
-                    className="rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200"
+                    className="rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2"
                     style={{
                       backgroundColor: isSelected ? 'var(--color-accent)' : 'var(--color-surface1)',
                       color: isSelected ? 'var(--color-base)' : 'var(--color-text)',
@@ -244,7 +244,7 @@ export default function ProjectsPage() {
                     setSearchQuery('');
                     setSelectedTag('all');
                   }}
-                  className="ml-2 text-xs underline transition-colors"
+                  className="ml-2 text-xs underline transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2 rounded"
                   style={{ color: 'var(--color-subtext1)' }}
                   onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
                   onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-subtext1)'}
@@ -259,7 +259,8 @@ export default function ProjectsPage() {
       </div>
 
       {/* Projects Grid - Wider container */}
-      <div className="mx-auto max-w-screen-2xl">
+      <section className="mx-auto max-w-screen-2xl" aria-labelledby="projects-list-heading">
+        <h2 id="projects-list-heading" className="sr-only">{t('projects.list_heading') || 'Liste des projets'}</h2>
         <div className="grid gap-6 pt-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
           {filteredProjects.length > 0 ? (
             filteredProjects.map((project) => (
@@ -274,7 +275,7 @@ export default function ProjectsPage() {
             </p>
           )}
         </div>
-      </div>
+      </section>
     </div>
   );
 }

@@ -71,8 +71,9 @@
 	--color-blue: var(--catppuccin-latte-blue);
 	--color-lavender: var(--catppuccin-latte-lavender);
 	--color-text: var(--catppuccin-latte-text);
-	--color-subtext1: var(--catppuccin-latte-subtext1);
-	--color-subtext0: var(--catppuccin-latte-subtext0);
+	/* WCAG AA compliant: using text color for better contrast (4.5:1 ratio) */
+	--color-subtext1: var(--catppuccin-latte-text);
+	--color-subtext0: var(--catppuccin-latte-text);
 	--color-overlay0: var(--catppuccin-latte-overlay0);
 	--color-surface2: var(--catppuccin-latte-surface2);
 	--color-surface1: var(--catppuccin-latte-surface1);
@@ -100,8 +101,9 @@
 		--color-blue: var(--catppuccin-mocha-blue);
 		--color-lavender: var(--catppuccin-mocha-lavender);
 		--color-text: var(--catppuccin-mocha-text);
-		--color-subtext1: var(--catppuccin-mocha-subtext1);
-		--color-subtext0: var(--catppuccin-mocha-subtext0);
+		/* WCAG AA compliant: using text color for better contrast (4.5:1 ratio) */
+		--color-subtext1: var(--catppuccin-mocha-text);
+		--color-subtext0: var(--catppuccin-mocha-text);
 		--color-overlay0: var(--catppuccin-mocha-overlay0);
 		--color-surface2: var(--catppuccin-mocha-surface2);
 		--color-surface1: var(--catppuccin-mocha-surface1);

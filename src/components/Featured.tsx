@@ -8,7 +8,7 @@ import { getTagColor } from '@/src/lib/tagColors';
 import { useLanguage } from '@/src/contexts/LanguageContext';
 
 // Composant pour gérer les images avec placeholder
-function FeaturedImage({ src, alt, slug }: { src: string | undefined | null; alt: string; slug: string }) {
+function FeaturedImage({ src, slug }: { src: string | undefined | null; slug: string }) {
   const { t } = useLanguage();
   const [hasError, setHasError] = useState(false);
 
@@ -26,7 +26,7 @@ function FeaturedImage({ src, alt, slug }: { src: string | undefined | null; alt
       {src && !hasError ? (
         <Image 
           src={src}
-          alt={alt}
+          alt=""
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
           onError={() => setHasError(true)}
@@ -136,7 +136,7 @@ export default function Featured({ projects, maxProjects }: FeaturedProps) {
           <Link
             key={project.slug}
             href={`/projects/${project.slug}`}
-            className="group block overflow-hidden rounded-xl border shadow-lg transition-all duration-300 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+            className="group block overflow-hidden rounded-xl border shadow-lg transition-all duration-300 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2"
             style={{
               borderColor: 'var(--color-surface0)',
               backgroundColor: 'var(--color-mantle)'
@@ -151,7 +151,6 @@ export default function Featured({ projects, maxProjects }: FeaturedProps) {
           >
             <FeaturedImage
               src={project.metadata.image?.url}
-              alt={project.metadata.image?.alt || project.metadata.title}
               slug={project.slug}
             />
 
@@ -171,22 +170,19 @@ export default function Featured({ projects, maxProjects }: FeaturedProps) {
 
               {project.metadata.tags && project.metadata.tags.length > 0 && (
                 <div className="flex flex-wrap items-center gap-2 pt-1">
-                  {project.metadata.tags.map((tag) => {
-                    const tagColor = getTagColor(tag, project.slug);
-                    const style = tagColor.type === 'hex' 
-                      ? { backgroundColor: 'var(--color-surface0)', color: tagColor.color }
-                      : { backgroundColor: 'var(--color-surface0)', color: `var(--color-${tagColor.color})` };
-                    
-                    return (
-                      <span
-                        key={tag}
-                        className="rounded-full px-2.5 py-0.5 text-xs font-semibold"
-                        style={style}
-                      >
-                        {tag}
-                      </span>
-                    );
-                  })}
+                  {project.metadata.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full px-2.5 py-0.5 text-xs font-semibold"
+                      style={{ 
+                        backgroundColor: 'var(--color-surface0)', 
+                        color: 'var(--color-text)',
+                        border: '1px solid var(--color-surface2)'
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               )}
             </div>

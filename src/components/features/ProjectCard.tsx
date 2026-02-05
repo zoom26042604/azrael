@@ -26,7 +26,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Link 
       href={`/projects/${project.slug}`} 
-      className="group block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded-xl"
+      className="group block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2 rounded-xl"
       aria-label={`${title} - ${description}`}
     >
       <article
@@ -52,7 +52,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           >
             <Image
               src={project.image}
-              alt={title}
+              alt=""
               fill
               loading="lazy"
               className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -97,25 +97,22 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             {description}
           </p>
 
-          {/* Tags - même style que Featured */}
+          {/* Tags - style sobre cohérent */}
           {project.tags && project.tags.length > 0 && (
             <div className="flex flex-wrap items-center gap-2 pt-1">
-              {project.tags.map((tag) => {
-                const tagColor = getTagColor(tag, project.slug);
-                const style = tagColor.type === 'hex' 
-                  ? { backgroundColor: 'var(--color-surface0)', color: tagColor.color }
-                  : { backgroundColor: 'var(--color-surface0)', color: `var(--color-${tagColor.color})` };
-
-                return (
-                  <span
-                    key={tag}
-                    className="rounded-full px-2.5 py-0.5 text-xs font-semibold"
-                    style={style}
-                  >
-                    {tag}
-                  </span>
-                );
-              })}
+              {project.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full px-2.5 py-0.5 text-xs font-semibold"
+                  style={{ 
+                    backgroundColor: 'var(--color-surface0)', 
+                    color: 'var(--color-text)',
+                    border: '1px solid var(--color-surface2)'
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           )}
         </div>

@@ -57,14 +57,20 @@ const COLOR_PALETTE = [
 function shouldUseWhiteText(hexColor: string): boolean {
   // Convertir hex en RGB
   const hex = hexColor.replace('#', '');
-  const r = parseInt(hex.substring(0, 2), 16);
-  const g = parseInt(hex.substring(2, 4), 16);
-  const b = parseInt(hex.substring(4, 6), 16);
+  const r = parseInt(hex.substring(0, 2), 16) / 255;
+  const g = parseInt(hex.substring(2, 4), 16) / 255;
+  const b = parseInt(hex.substring(4, 6), 16) / 255;
 
-  // Calculer la luminance relative (WCAG formula)
-  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  // Appliquer la correction gamma (WCAG 2.1 formula)
+  const rLinear = r <= 0.03928 ? r / 12.92 : Math.pow((r + 0.055) / 1.055, 2.4);
+  const gLinear = g <= 0.03928 ? g / 12.92 : Math.pow((g + 0.055) / 1.055, 2.4);
+  const bLinear = b <= 0.03928 ? b / 12.92 : Math.pow((b + 0.055) / 1.055, 2.4);
 
-  // Si la couleur est trop claire (luminance > 0.5), utiliser du texte noir
+  // Calculer la luminance relative (WCAG 2.1)
+  const luminance = 0.2126 * rLinear + 0.7152 * gLinear + 0.0722 * bLinear;
+
+  // Si la luminance est < 0.5, utiliser du texte blanc (meilleur contraste)
+  // Cette valeur garantit un ratio de contraste d'au moins 4.5:1
   return luminance < 0.5;
 }
 

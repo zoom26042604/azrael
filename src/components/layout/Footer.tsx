@@ -88,55 +88,56 @@ export default function Footer() {
       >
         <div className="flex flex-col items-center gap-2 md:flex-row md:gap-3">
           <span>© {year} Nathan FERRE</span>
-          <span className="hidden md:inline" style={{ color: 'var(--color-surface1)' }}>•</span>
+          <span className="hidden md:inline" style={{ color: 'var(--color-text)' }} aria-hidden="true">•</span>
           <a
             href={commitLinkUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 transition-colors duration-200"
+            aria-label={`View commit ${shortSha} on GitHub`}
+            className="flex items-center gap-1 transition-colors duration-200 rounded"
             style={{ color: 'var(--color-subtext1)' }}
             onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
             onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-subtext1)'}
           >
-            <GitCommit size={14} />
+            <GitCommit size={14} aria-hidden="true" />
             <span className="font-mono text-xs">{shortSha}</span>
           </a>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5">
-            <Clock size={14} style={{ color: 'var(--color-text)' }} />
+          <div className="flex items-center gap-1.5" aria-label={`Time on site: ${timeOnSite}`}>
+            <Clock size={14} style={{ color: 'var(--color-text)' }} aria-hidden="true" />
             <span style={{ color: 'var(--color-subtext1)' }}>
               <span className="font-mono" style={{ color: 'var(--color-peach)' }}>{timeOnSite}</span>
             </span>
           </div>
 
-          <span className="hidden sm:inline" style={{ color: 'var(--color-surface1)' }}>•</span>
+          <span className="hidden sm:inline" style={{ color: 'var(--color-text)' }} aria-hidden="true">•</span>
 
           <div className="flex items-center gap-x-3">
             <a
               href="https://github.com/zoom26042604"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="transition-colors duration-200"
+              aria-label="GitHub profile"
+              className="transition-colors duration-200 rounded"
               style={{ color: 'var(--color-subtext1)' }}
               onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
               onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-subtext1)'}
             >
-              <Github size={18} />
+              <Github size={18} aria-hidden="true" />
             </a>
             <a
               href="https://www.linkedin.com/in/nathan-ferre-9ab76723a/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="transition-colors duration-200"
+              aria-label="LinkedIn profile"
+              className="transition-colors duration-200 rounded"
               style={{ color: 'var(--color-subtext1)' }}
               onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
               onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-subtext1)'}
             >
-              <Linkedin size={18} />
+              <Linkedin size={18} aria-hidden="true" />
             </a>
           </div>
         </div>

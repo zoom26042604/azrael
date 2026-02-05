@@ -83,7 +83,7 @@ const translations = {
       student: 'Étudiant',
       student_it: 'Étudiant en Informatique',
       at: 'à',
-      passionate: 'Passionné par le développement web et les technologies modernes.',
+      passionate: 'Passionné par le développement plus principalement du web et du devops et les technologies modernes.',
       about_me: 'Plus à propos de moi',
     },
     featured: {
@@ -271,7 +271,7 @@ const translations = {
       student: 'Student',
       student_it: 'Computer Science Student',
       at: 'at',
-      passionate: 'Passionate about web development and modern technologies.',
+      passionate: 'Passionate about devops and web development and modern technologies.',
       about_me: 'More about me',
     },
     featured: {

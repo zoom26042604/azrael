@@ -24,6 +24,9 @@ import {
   SiCss3,
   SiJavascript
 } from 'react-icons/si';
+import {
+  FaCode
+}  from "react-icons/fa6"
 import { useLanguage } from '@/src/contexts/LanguageContext';
 import HeadMeta from '@/src/components/HeadMeta';
 
@@ -100,12 +103,14 @@ export default function AboutPage() {
               <img
                 src="/images/profile/profile.webp"
                 alt="Photo de profil de Nathan Ferre"
+                width={800}
+                height={993}
                 className="h-full w-full rounded-xl object-cover shadow-lg transition-transform duration-300 hover:scale-[1.02]"
               />
             </div>
 
             <div className="space-y-4 md:col-span-2">
-              <p className="text-base leading-relaxed" style={{ color: 'var(--color-subtext0)' }}>
+              <p className="text-base leading-relaxed" style={{ color: 'var(--color-text)' }}>
                 <b>{t('about.greeting')}</b> {t('about.intro_1')}{' '}
                 <Link href="/socials" className="link">
                   (@zoom26042604)
@@ -118,11 +123,11 @@ export default function AboutPage() {
                 {' '}{t('about.intro_4')}
               </p>
 
-              <p className="text-base leading-relaxed" style={{ color: 'var(--color-subtext0)' }}>
+              <p className="text-base leading-relaxed" style={{ color: 'var(--color-text)' }}>
                 {t('about.currently')} Ynov Campus Toulouse{t('about.studying')}
               </p>
 
-              <p className="text-base leading-relaxed" style={{ color: 'var(--color-subtext0)' }}>
+              <p className="text-base leading-relaxed" style={{ color: 'var(--color-text)' }}>
                 {t('about.outside')}
               </p>
 
@@ -131,26 +136,26 @@ export default function AboutPage() {
                   href="https://github.com/zoom26042604"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm transition-colors hover:text-[var(--color-accent)]"
+                  className="inline-flex items-center gap-1.5 text-sm transition-colors hover:text-(--color-accent) rounded focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2 underline underline-offset-2 decoration-1"
                 >
-                  <LuGithub size={16} />
+                  <LuGithub size={16} aria-hidden="true" />
                   GitHub
                 </a>
-                <span style={{ color: 'var(--color-surface1)' }}>*</span>
+                <span style={{ color: 'var(--color-text)' }} aria-hidden="true">*</span>
                 <a
                   href="https://www.linkedin.com/in/nathan-ferre-0ba3a438a/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm transition-colors hover:text-[var(--color-accent)]"
+                  className="inline-flex items-center gap-1.5 text-sm transition-colors hover:text-(--color-accent) rounded focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2 underline underline-offset-2 decoration-1"
                 >
-                  <LuLinkedin size={16} />
+                  <LuLinkedin size={16} aria-hidden="true" />
                   LinkedIn
                 </a>
-                <span style={{ color: 'var(--color-surface1)' }}>*</span>
+                <span style={{ color: 'var(--color-text)' }} aria-hidden="true">*</span>
                 <span
                   role="button"
-                  aria-label="Send an email"
-                  className="inline-flex cursor-pointer items-center gap-1.5 text-sm transition-colors hover:text-[var(--color-accent)]"
+                  aria-label="Send an email to nathanferre06@gmail.com"
+                  className="inline-flex cursor-pointer items-center gap-1.5 text-sm transition-colors hover:text-(--color-accent) rounded focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2 underline underline-offset-2 decoration-1"
                   tabIndex={0}
                   onClick={handleEmailClick}
                   onKeyDown={(e) => {
@@ -159,7 +164,7 @@ export default function AboutPage() {
                     }
                   }}
                 >
-                  <LuMail size={16} />
+                  <LuMail size={16} aria-hidden="true" />
                   nathanferre06@gmail.com
                 </span>
               </div>
@@ -170,7 +175,7 @@ export default function AboutPage() {
         {/* Formation Section */}
         <section className="space-y-6">
           <h2 className="text-2xl font-bold flex items-center gap-3">
-            <LuGraduationCap size={28} style={{ color: 'var(--color-accent)' }} />
+            <LuGraduationCap size={28} style={{ color: 'var(--color-accent)' }} aria-hidden="true" />
             {language === 'fr' ? 'Formation' : 'Education'}
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
@@ -202,6 +207,8 @@ export default function AboutPage() {
                         <img 
                           src={edu.logo} 
                           alt={`Logo ${edu.institution}`}
+                          width={48}
+                          height={48}
                           className="h-full w-full object-cover"
                         />
                       ) : (
@@ -215,7 +222,7 @@ export default function AboutPage() {
                       <p className="text-sm" style={{ color: 'var(--color-accent)' }}>
                         {edu.degree}
                       </p>
-                      <p className="text-xs mt-1" style={{ color: 'var(--color-subtext1)' }}>
+                      <p className="text-xs mt-1" style={{ color: 'var(--color-text)' }}>
                         {edu.period}
                       </p>
                     </div>
@@ -229,8 +236,8 @@ export default function AboutPage() {
         {/* Hard Skills Section */}
         <section className="space-y-6">
           <h2 className="text-2xl font-bold flex items-center gap-3">
-            <LuBriefcase size={28} style={{ color: 'var(--color-accent)' }} />
-            {language === 'fr' ? 'Compétences Techniques' : 'Technical Skills'}
+            <FaCode size={28} style={{ color: 'var(--color-accent)' }} aria-hidden="true" />
+            {language === 'fr' ? 'Hard Skills' : 'Hard Skills'}
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
             {hardSkills.map((skill) => {
@@ -244,7 +251,7 @@ export default function AboutPage() {
                     border: '1px solid var(--color-surface0)',
                   }}
                 >
-                  <Icon size={20} style={{ color: skill.color }} />
+                  <Icon size={20} style={{ color: skill.color }} aria-hidden="true" />
                   <span className="text-sm font-medium" style={{ color: 'var(--color-text)' }}>
                     {skill.name}
                   </span>
@@ -257,7 +264,7 @@ export default function AboutPage() {
         {/* Soft Skills Section */}
         <section className="space-y-6">
           <h2 className="text-2xl font-bold flex items-center gap-3">
-            <LuHeart size={28} style={{ color: 'var(--color-accent)' }} />
+            <LuHeart size={28} style={{ color: 'var(--color-accent)' }} aria-hidden="true" />
             Soft Skills
           </h2>
           <div className="flex flex-wrap gap-3">
@@ -272,7 +279,7 @@ export default function AboutPage() {
                     color: 'var(--color-base)',
                   }}
                 >
-                  <Icon size={16} />
+                  <Icon size={16} aria-hidden="true" />
                   <span className="text-sm font-medium">{skill.name}</span>
                 </div>
               );

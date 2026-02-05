@@ -25,11 +25,11 @@ export default function Sidebar({ isOpen, closeSidebar, openGuide }: SidebarProp
   }, [openGuide, closeSidebar]);
 
   const mainNavItems = useMemo(() => [
-    { title: t('nav.about'), href: '/about' },
-    { title: t('nav.projects'), href: '/projects' },
-    { title: t('nav.contact'), href: '/contact' },
-    { title: t('nav.resume'), href: '/cv' },
-    { title: t('nav.socials'), href: '/socials' }
+    { title: t('nav.about'), href: '/about', external: false },
+    { title: t('nav.projects'), href: '/projects', external: false },
+    { title: t('nav.contact'), href: '/contact', external: false },
+    { title: t('nav.resume'), href: '/cv', external: false },
+    { title: t('nav.socials'), href: '/socials', external: false }
   ], [t]);
 
   const moreNavItems = useMemo(() => [
@@ -104,7 +104,7 @@ export default function Sidebar({ isOpen, closeSidebar, openGuide }: SidebarProp
                     href={item.href}
                     target={item.external ? '_blank' : undefined}
                     rel={item.external ? 'noopener noreferrer' : undefined}
-                    className="block rounded p-2 transition-colors duration-150 focus:outline-none"
+                    className="block rounded p-2 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-inset"
                     style={{
                       backgroundColor: isActive ? 'var(--color-surface0)' : 'transparent'
                     }}
@@ -135,12 +135,12 @@ export default function Sidebar({ isOpen, closeSidebar, openGuide }: SidebarProp
               />
             </li>
 
-            <li 
-              className="px-2 py-1 text-xs font-semibold tracking-wider uppercase"
+            <div
+              className="mt-6 mb-2 px-2 text-xs font-semibold uppercase tracking-wider"
               style={{ color: 'var(--color-subtext0)' }}
             >
               {t('nav.more')}
-            </li>
+            </div>
 
             {moreNavItems.map((item) => {
               const isActive = currentPath === item.href;
@@ -151,7 +151,7 @@ export default function Sidebar({ isOpen, closeSidebar, openGuide }: SidebarProp
                     href={item.href}
                     target={external ? '_blank' : undefined}
                     rel={external ? 'noopener noreferrer' : undefined}
-                    className="block rounded p-2 transition-colors duration-150 focus:outline-none"
+                    className="block rounded p-2 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-inset"
                     style={{
                       backgroundColor: isActive ? 'var(--color-surface0)' : 'transparent'
                     }}

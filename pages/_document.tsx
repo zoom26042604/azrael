@@ -38,9 +38,6 @@ export default function Document() {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Nathan FERRE" />
-        
-        {/* Canonical URL */}
-        <link rel="canonical" href="https://nathan-ferre.fr/" />
       </Head>
       <body suppressHydrationWarning>
         <Main />

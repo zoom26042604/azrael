@@ -5,6 +5,7 @@ import { Github, Linkedin, Mail, ArrowRight } from "lucide-react";
 import Featured from "@/src/components/Featured";
 import Experience from "@/src/components/Experience";
 import AnimatedSection from "@/src/components/AnimatedSection";
+import HeadMeta from "@/src/components/HeadMeta";
 import { featuredProjects } from "@/src/data/projects";
 import { experienceTimeline } from "@/src/data/experience";
 import { FeaturedProject } from "@/src/types";
@@ -52,8 +53,15 @@ export default function Home() {
       };
     }), [language]
   );
+  
   return (
-    <div className="mx-auto max-w-6xl space-y-12 px-4 py-8 md:space-y-16 md:px-4 md:py-12">
+    <>
+      <HeadMeta
+        title="Nathan FERRE"
+        description="Portfolio personnel - Étudiant en Informatique"
+        path="/"
+      />
+      <div className="mx-auto max-w-6xl space-y-12 px-4 py-8 md:space-y-16 md:px-4 md:py-12">
       {/* Section 1: Hero / Introduction */}
       <AnimatedSection animation="fade-in">
         <section className="space-y-5">
@@ -80,50 +88,48 @@ export default function Home() {
               href="https://github.com/zoom26042604"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm transition-colors"
+              className="inline-flex items-center gap-2 text-sm transition-colors rounded"
               style={{ color: 'var(--color-subtext1)' }}
               onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
               onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-subtext1)'}
             >
-              <Github size={18} strokeWidth={1.5} />
+              <Github size={18} strokeWidth={1.5} aria-hidden="true" />
               <span>GitHub</span>
             </a>
-            <span className="text-xs" style={{ color: 'var(--color-surface1)' }}>|</span>
+            <span className="text-xs" style={{ color: 'var(--color-text)' }} aria-hidden="true">|</span>
             <a
               href="https://www.linkedin.com/in/nathan-ferre-0ba3a438a/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm transition-colors"
+              className="inline-flex items-center gap-2 text-sm transition-colors rounded"
               style={{ color: 'var(--color-subtext1)' }}
               onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
               onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-subtext1)'}
             >
-              <Linkedin size={18} strokeWidth={1.5} />
+              <Linkedin size={18} strokeWidth={1.5} aria-hidden="true" />
               <span>LinkedIn</span>
             </a>
-            <span className="text-xs" style={{ color: 'var(--color-surface1)' }}>|</span>
+            <span className="text-xs" style={{ color: 'var(--color-text)' }} aria-hidden="true">|</span>
             <a
               href="mailto:nathanferre06@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm transition-colors"
+              className="inline-flex items-center gap-2 text-sm transition-colors rounded"
               style={{ color: 'var(--color-subtext1)' }}
               onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
               onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-subtext1)'}
             >
-              <Mail size={18} strokeWidth={1.5} />
+              <Mail size={18} strokeWidth={1.5} aria-hidden="true" />
               <span>nathanferre06@gmail.com</span>
             </a>
-            <span className="text-xs" style={{ color: 'var(--color-surface1)' }}>|</span>
+            <span className="text-xs" style={{ color: 'var(--color-text)' }} aria-hidden="true">|</span>
             <a
               href="about"
-              className="group inline-flex items-center gap-1 text-sm transition-colors"
+              className="group inline-flex items-center gap-1 text-sm transition-colors rounded"
               style={{ color: 'var(--color-subtext1)' }}
               onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
               onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-subtext1)'}
             >
               <span>{t('home.about_me')}</span>
-              <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-0.5" />
+              <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
             </a>
           </div>
         </section>
@@ -152,6 +158,7 @@ export default function Home() {
           </div>
         </section>
       </AnimatedSection>
-    </div>
+      </div>
+    </>
   );
 }
