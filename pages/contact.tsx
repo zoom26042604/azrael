@@ -80,22 +80,30 @@ export default function ContactPage() {
 
     setStatus('loading');
 
-    // TODO: Intégrer EmailJS ou autre service d'email
-    // Pour l'instant, simuler l'envoi
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Simuler un succès
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
       
       // Reset le status après 5 secondes
       setTimeout(() => setStatus('idle'), 5000);
     } catch (error) {
+      console.error('Error sending message:', error);
       setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
     }
-  }, [formData, language]);
+  }, [formData]);
 
   return (
     <>
