@@ -54,8 +54,37 @@
 	--catppuccin-mocha-crust: #11111b;
 }
 
-/* Light mode (Latte) */
+/* Default: Dark mode (Mocha) */
 :root {
+	--color-rosewater: var(--catppuccin-mocha-rosewater);
+	--color-flamingo: var(--catppuccin-mocha-flamingo);
+	--color-pink: var(--catppuccin-mocha-pink);
+	--color-mauve: var(--catppuccin-mocha-mauve);
+	--color-red: var(--catppuccin-mocha-red);
+	--color-maroon: var(--catppuccin-mocha-maroon);
+	--color-peach: var(--catppuccin-mocha-peach);
+	--color-yellow: var(--catppuccin-mocha-yellow);
+	--color-green: var(--catppuccin-mocha-green);
+	--color-teal: var(--catppuccin-mocha-teal);
+	--color-sky: var(--catppuccin-mocha-sky);
+	--color-sapphire: var(--catppuccin-mocha-sapphire);
+	--color-blue: var(--catppuccin-mocha-blue);
+	--color-lavender: var(--catppuccin-mocha-lavender);
+	--color-text: var(--catppuccin-mocha-text);
+	/* WCAG AA compliant: using text color for better contrast (4.5:1 ratio) */
+	--color-subtext1: var(--catppuccin-mocha-text);
+	--color-subtext0: var(--catppuccin-mocha-text);
+	--color-overlay0: var(--catppuccin-mocha-overlay0);
+	--color-surface2: var(--catppuccin-mocha-surface2);
+	--color-surface1: var(--catppuccin-mocha-surface1);
+	--color-surface0: var(--catppuccin-mocha-surface0);
+	--color-base: var(--catppuccin-mocha-base);
+	--color-mantle: var(--catppuccin-mocha-mantle);
+	--color-accent: var(--catppuccin-mocha-peach);
+}
+
+/* Light mode (Latte) */
+[data-theme="latte"] {
 	--color-rosewater: var(--catppuccin-latte-rosewater);
 	--color-flamingo: var(--catppuccin-latte-flamingo);
 	--color-pink: var(--catppuccin-latte-pink);
@@ -81,35 +110,4 @@
 	--color-base: var(--catppuccin-latte-base);
 	--color-mantle: var(--catppuccin-latte-mantle);
 	--color-accent: var(--catppuccin-latte-peach);
-}
-
-/* Dark mode (Mocha) */
-@media (prefers-color-scheme: dark) {
-	:root {
-		--color-rosewater: var(--catppuccin-mocha-rosewater);
-		--color-flamingo: var(--catppuccin-mocha-flamingo);
-		--color-pink: var(--catppuccin-mocha-pink);
-		--color-mauve: var(--catppuccin-mocha-mauve);
-		--color-red: var(--catppuccin-mocha-red);
-		--color-maroon: var(--catppuccin-mocha-maroon);
-		--color-peach: var(--catppuccin-mocha-peach);
-		--color-yellow: var(--catppuccin-mocha-yellow);
-		--color-green: var(--catppuccin-mocha-green);
-		--color-teal: var(--catppuccin-mocha-teal);
-		--color-sky: var(--catppuccin-mocha-sky);
-		--color-sapphire: var(--catppuccin-mocha-sapphire);
-		--color-blue: var(--catppuccin-mocha-blue);
-		--color-lavender: var(--catppuccin-mocha-lavender);
-		--color-text: var(--catppuccin-mocha-text);
-		/* WCAG AA compliant: using text color for better contrast (4.5:1 ratio) */
-		--color-subtext1: var(--catppuccin-mocha-text);
-		--color-subtext0: var(--catppuccin-mocha-text);
-		--color-overlay0: var(--catppuccin-mocha-overlay0);
-		--color-surface2: var(--catppuccin-mocha-surface2);
-		--color-surface1: var(--catppuccin-mocha-surface1);
-		--color-surface0: var(--catppuccin-mocha-surface0);
-		--color-base: var(--catppuccin-mocha-base);
-		--color-mantle: var(--catppuccin-mocha-mantle);
-		--color-accent: var(--catppuccin-mocha-peach);
-	}
 }
