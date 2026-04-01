@@ -16,7 +16,7 @@ export default function SocialsPage() {
     {
       name: 'LinkedIn',
       icon: Linkedin,
-      url: 'https://www.linkedin.com/in/nathan-ferre-0ba3a438a',
+      url: 'https://www.linkedin.com/in/nathan-ferre',
       description: t('socials.linkedin_desc'),
       color: 'var(--color-blue)'
     },
