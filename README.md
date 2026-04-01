@@ -217,7 +217,7 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 **Nathan FERRE**
 
 - Site : [nathan-ferre.fr](https://nathan-ferre.fr)
-- LinkedIn : [Nathan FERRE](https://www.linkedin.com/in/nathan-ferre-0ba3a438a/)
+- LinkedIn : [Nathan FERRE](https://www.linkedin.com/in/nathan-ferre/)
 - GitHub : [@zoom26042604](https://github.com/zoom26042604)
 - Email : nathanferre06@gmail.com
 

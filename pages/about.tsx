@@ -143,7 +143,7 @@ export default function AboutPage() {
                 </a>
                 <span style={{ color: 'var(--color-text)' }} aria-hidden="true">*</span>
                 <a
-                  href="https://www.linkedin.com/in/nathan-ferre-0ba3a438a/"
+                  href="https://www.linkedin.com/in/nathan-ferre/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-sm transition-colors hover:text-(--color-accent) rounded focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2 underline underline-offset-2 decoration-1"

@@ -107,7 +107,7 @@ export default function Home() {
             </a>
             <span className="text-xs" style={{ color: 'var(--color-text)' }} aria-hidden="true">|</span>
             <a
-              href="https://www.linkedin.com/in/nathan-ferre-0ba3a438a/"
+              href="https://www.linkedin.com/in/nathan-ferre/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm transition-colors rounded"
