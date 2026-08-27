@@ -3,11 +3,15 @@ import { Folder, Search, SlidersHorizontal, ChevronDown, ChevronUp } from 'lucid
 import { projects } from '@/src/data/projects';
 import ProjectCard from '@/src/components/features/ProjectCard';
 import { useLanguage } from '@/src/contexts/LanguageContext';
+import { getProjectStartDate } from '@/src/lib/utils';
+import { ProjectCategory } from '@/src/types';
+import { getProjectTranslation } from '@/src/data/projectTranslations';
 
 export default function ProjectsPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTag, setSelectedTag] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<ProjectCategory | 'all'>('all');
   const [sortBy, setSortBy] = useState<'name' | 'date' | 'default'>('default');
   const [showQuickFilters, setShowQuickFilters] = useState(true); // Valeur par défaut
   const [isClient, setIsClient] = useState(false); // Tracker si on est côté client
@@ -30,6 +34,7 @@ export default function ProjectsPage() {
 
   // Liste des tags qui sont des types de projet (à exclure des filtres rapides)
   const projectTypesTags = ['portfolio', 'ecommerce', 'blog'];
+  const projectCategories: ProjectCategory[] = ['personal', 'professional', 'academic'];
 
   // Extraire tous les tags technologiques (en excluant les types de projet)
   const techTags = useMemo(() => {
@@ -63,19 +68,27 @@ export default function ProjectsPage() {
       filtered = filtered.filter(project => project.tags.includes(selectedTag));
     }
 
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(project => project.category === selectedCategory);
+    }
+
     // Trier
     if (sortBy === 'name') {
-      filtered = [...filtered].sort((a, b) => a.title.localeCompare(b.title));
-    } else if (sortBy === 'date') {
       filtered = [...filtered].sort((a, b) => {
-        const dateA = new Date(a.date || '2024-01-01').getTime();
-        const dateB = new Date(b.date || '2024-01-01').getTime();
+        const titleA = getProjectTranslation(a.slug, language)?.title || a.title;
+        const titleB = getProjectTranslation(b.slug, language)?.title || b.title;
+        return titleA.localeCompare(titleB, language);
+      });
+    } else if (sortBy === 'date' || sortBy === 'default') {
+      filtered = [...filtered].sort((a, b) => {
+        const dateA = getProjectStartDate(a.date);
+        const dateB = getProjectStartDate(b.date);
         return dateB - dateA; // Plus récent en premier
       });
     }
 
     return filtered;
-  }, [searchQuery, selectedTag, sortBy]);
+  }, [searchQuery, selectedTag, selectedCategory, sortBy, language]);
 
   return (
     <div className="space-y-8 px-4 py-8 md:px-6">
@@ -174,7 +187,10 @@ export default function ProjectsPage() {
           {showQuickFilters && (
             <div className="flex flex-wrap gap-2 animate-in fade-in duration-200">
               <button
-                onClick={() => setSelectedTag('all')}
+                onClick={() => {
+                  setSelectedTag('all');
+                  setSelectedCategory('all');
+                }}
                 aria-label={`${t('projects.all_projects')} (${projects.length})`}
                 aria-pressed={selectedTag === 'all'}
                 className="rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200"
@@ -196,6 +212,29 @@ export default function ProjectsPage() {
               >
                 {t('projects.all_projects')} ({projects.length})
               </button>
+              {projectCategories.map(category => {
+                const count = projects.filter(project => project.category === category).length;
+                const isSelected = selectedCategory === category;
+                return (
+                  <button
+                    key={category}
+                    onClick={() => {
+                      setSelectedCategory(category);
+                      setSelectedTag('all');
+                    }}
+                    aria-label={`${t(`projects.category_${category}`)} (${count})`}
+                    aria-pressed={isSelected}
+                    className="rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-200"
+                    style={{
+                      backgroundColor: isSelected ? 'var(--color-accent)' : 'var(--color-surface1)',
+                      color: isSelected ? 'var(--color-base)' : 'var(--color-text)',
+                      border: isSelected ? '2px solid var(--color-accent)' : '2px solid transparent',
+                    }}
+                  >
+                    {t(`projects.category_${category}`)} ({count})
+                  </button>
+                );
+              })}
               {techTags.map(tag => {
                 const count = projects.filter(p => p.tags.includes(tag)).length;
                 const isSelected = selectedTag === tag;
@@ -231,7 +270,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* Results Counter */}
-        {(searchQuery || selectedTag !== 'all') && (
+        {(searchQuery || selectedTag !== 'all' || selectedCategory !== 'all') && (
           <div className="pt-2 border-t" style={{ borderColor: 'var(--color-surface2)' }}>
             <p className="text-sm" style={{ color: 'var(--color-subtext0)' }}>
               <span style={{ color: 'var(--color-accent)', fontWeight: 600 }}>
@@ -243,6 +282,7 @@ export default function ProjectsPage() {
                   onClick={() => {
                     setSearchQuery('');
                     setSelectedTag('all');
+                    setSelectedCategory('all');
                   }}
                   className="ml-2 text-xs underline transition-colors"
                   style={{ color: 'var(--color-subtext1)' }}

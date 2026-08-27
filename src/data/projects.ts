@@ -14,7 +14,8 @@ export const projects: Project[] = [
       reality: 'portfolio-personnel'
     },
     tags: ['next.js', 'react', 'typescript', 'tailwind', 'portfolio'],
-    date: '2024-12',
+    category: 'personal',
+    date: '12/2024',
     image: '/images/projects/portfolio-personnel.webp',
     github: 'https://github.com/zoom26042604/azrael',
     demo: 'https://nathan-ferre.fr',
@@ -31,7 +32,8 @@ export const projects: Project[] = [
       reality: 'game-2048'
     },
     tags: ['next.js', 'react', 'typescript', 'prisma', 'sqlite', 'framer-motion', 'game'],
-    date: '2025-01',
+    category: 'personal',
+    date: '01/2025',
     image: '/images/projects/game-2048.webp',
     github: 'https://github.com/zoom26042604/game-2048',
     demo: 'https://2048.nathan-ferre.fr',
@@ -48,10 +50,29 @@ export const projects: Project[] = [
       reality: 'interactive-cv'
     },
     tags: ['next.js', 'react', 'typescript', 'tailwind', 'framer-motion', 'cv'],
-    date: '2025-01',
+    category: 'academic',
+    date: '01/2025',
     image: '/images/projects/interactive-cv.webp',
     github: 'https://github.com/zoom26042604/cv',
     demo: 'https://cv.nathan-ferre.fr',
+    featured: true
+  },
+  {
+    slug: 'atelier-de-camille',
+    title: 'atelier-de-camille',
+    description: 'atelier-de-camille',
+    sections: {
+      journey: 'atelier-de-camille',
+      technical: ['atelier-de-camille'],
+      features: ['atelier-de-camille'],
+      reality: 'atelier-de-camille'
+    },
+    tags: ['java', 'spring-boot', 'postgresql', 'jwt', 'next.js', 'react', 'typescript', 'tailwind'],
+    category: 'professional',
+    date: '29/06/2026 – 03/08/2026',
+    image: '/images/projects/atelier-de-camille.webp',
+    github: '',
+    demo: '',
     featured: true
   }
 ];

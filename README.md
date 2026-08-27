@@ -153,8 +153,9 @@ Le breadcrumb supporte l'édition au clavier :
 ### Filtrage des projets
 
 - Recherche en temps réel par titre, description et tags
-- Tri par nom (A-Z) ou par date (récent)
-- Filtres rapides par technologie
+- Tri par nom (A-Z) ou par date (du plus récent au plus ancien)
+- Filtres par catégorie (personnel, professionnel, académique) et par technologie
+- Dates précises et plages de dates pour chaque projet
 
 ### Carte interactive
 
