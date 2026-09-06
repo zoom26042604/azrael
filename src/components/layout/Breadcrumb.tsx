@@ -28,13 +28,6 @@ export default function Breadcrumb() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const availableRoutes = generateRoutes();
-  
-  // Handle SSR when pathname is null
-  if (!pathname) {
-    return null;
-  }
-  
-  const breadcrumbs = pathname.split('/').filter(Boolean).slice(0, 4);
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
@@ -62,6 +55,13 @@ export default function Breadcrumb() {
     window.addEventListener('keydown', handleGlobalKeyDown);
     return () => window.removeEventListener('keydown', handleGlobalKeyDown);
   }, [isEditing, pathname]);
+
+  // Handle SSR when pathname is null
+  if (!pathname) {
+    return null;
+  }
+
+  const breadcrumbs = pathname.split('/').filter(Boolean).slice(0, 4);
 
   const handleClick = () => {
     // Add trailing slash if not present and not root
