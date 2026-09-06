@@ -17,12 +17,15 @@ export interface ProjectSection {
   reality?: string;
 }
 
+export type ProjectCategory = 'personal' | 'professional' | 'academic';
+
 export interface Project {
   slug: string;
   title: string;
   description: string;
   sections: ProjectSection;
   tags: string[];
+  category: ProjectCategory;
   date: string;
   image: string | null;
   github: string | null;

@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Calendar } from "lucide-react";
 import { Project } from "@/src/types";
 import { useLanguage } from "@/src/contexts/LanguageContext";
 import { getProjectTranslation } from "@/src/data/projectTranslations";
@@ -86,6 +87,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           >
             {title}
           </h3>
+
+          <div className="flex items-center gap-1.5 text-xs" style={{ color: "var(--color-subtext1)" }}>
+            <Calendar size={14} aria-hidden="true" />
+            <time>{project.date}</time>
+          </div>
 
           {/* Description - plus visible comme nyx */}
           <p

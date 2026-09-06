@@ -21,6 +21,30 @@ export function formatDate(date: string): string {
   });
 }
 
+export function getProjectStartDate(date: string): number {
+  const firstDate = date.match(/(?:\d{2}\/\d{2}\/\d{4}|\d{4}-\d{2})/)?.[0] ?? date;
+  const dayMonthYear = firstDate.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+
+  if (dayMonthYear) {
+    const [, day, month, year] = dayMonthYear;
+    return Date.UTC(Number(year), Number(month) - 1, Number(day));
+  }
+
+  const monthYear = firstDate.match(/^(\d{2})\/(\d{4})$/);
+  if (monthYear) {
+    const [, month, year] = monthYear;
+    return Date.UTC(Number(year), Number(month) - 1, 1);
+  }
+
+  const yearMonth = firstDate.match(/^(\d{4})-(\d{2})$/);
+  if (yearMonth) {
+    const [, year, month] = yearMonth;
+    return Date.UTC(Number(year), Number(month) - 1, 1);
+  }
+
+  return 0;
+}
+
 export function slugify(text: string): string {
   return text
     .toLowerCase()

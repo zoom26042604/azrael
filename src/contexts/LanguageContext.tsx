@@ -202,6 +202,9 @@ const translations = {
       results_found: 'projet(s) trouvé(s)',
       reset_filters: 'Réinitialiser',
       no_results: 'Aucun projet trouvé pour ce tag',
+      category_personal: 'Personnel',
+      category_professional: 'Professionnel',
+      category_academic: 'Académique',
     },
     socials: {
       title: 'Mes Réseaux Sociaux',
@@ -390,6 +393,9 @@ const translations = {
       results_found: 'project(s) found',
       reset_filters: 'Reset',
       no_results: 'No project found for this tag',
+      category_personal: 'Personal',
+      category_professional: 'Professional',
+      category_academic: 'Academic',
     },
     socials: {
       title: 'My Social Networks',
@@ -578,6 +584,9 @@ const translations = {
       results_found: '프로젝트를 찾았습니다',
       reset_filters: '초기화',
       no_results: '이 태그에 대한 프로젝트가 없습니다',
+      category_personal: '개인',
+      category_professional: '전문',
+      category_academic: '학업',
     },
     socials: {
       title: '소셜 네트워크',
