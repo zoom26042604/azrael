@@ -278,6 +278,8 @@ The design is responsive and adapts to all screens while remaining optimized for
 
 L'Atelier de Camille est précisément ce type de mission : une plateforme de réservation en ligne pour une prothésiste ongulaire indépendante, dans le secteur de la beauté et du soin, engagé dans une digitalisation croissante. Les clientes attendent aujourd'hui de pouvoir réserver depuis leur téléphone, tandis que la professionnelle veut garder un contrôle total sur son agenda, la validation de chaque demande et le suivi de sa clientèle. Le cahier des charges est précis sur ce point : aucune réservation n'est possible sans que Camille n'ait explicitement ouvert un créneau, et chaque demande passe par une validation manuelle avant tout encaissement d'acompte.
 
+Le projet a fait l'objet d'une continuité dans le travail d'équipe avec d'autres stagiaires, notamment Loïc Delprat et Ylan Dessenne, intervenus sur différentes sessions du projet. Pour structurer les tâches et assurer le suivi de l'avancement, nous avons utilisé un espace Notion muni d'un tableau Kanban mis en place par Ludovic Roux, regroupant l'ensemble des tickets et des fonctionnalités. Les échanges en temps réel, le partage d'écran et la coordination technique entre les membres se faisaient via Discord. Mon environnement de travail personnel s'est articulé autour de VS Code pour le développement, complété par l'outil Postman pour tester rigoureusement les routes de l'API, simuler les requêtes HTTP, valider les codes de retour et gérer l'authentification par token JWT.
+
 Je suis intervenu sur un projet déjà engagé : une API backend en Spring Boot relativement avancée (authentification JWT, gestion des utilisateurs, des services et des créneaux de disponibilité déjà fonctionnelle), et un frontend Next.js encore au stade de gabarit. Avant de produire la moindre ligne de code, j'ai consacré la première partie du stage à un audit complet : cartographie de l'architecture existante (couches controller/service/repository, conventions de nommage, sécurité), comparaison systématique avec le cahier des charges fonctionnel, la stack technique cible et le schéma de base de données cible déjà défini pour le projet, puis recensement précis des écarts (versions de Spring Boot, entités manquantes comme les réservations ou les paiements, dépendances non installées) et des questions à trancher avant d'agir. Plutôt qu'un audit ponctuel, j'ai pris l'habitude de documenter chacune de mes actions tout au long du stage, ticket par ticket : cette documentation technique personnelle m'a servi de fil directeur pour savoir précisément ce que j'avais fait et où j'en étais, et m'a aussi permis de m'approprier le fonctionnement de Spring Boot en l'expliquant avec le code réel du projet, pour m'assurer de bien maîtriser le terrain avant d'y toucher.
 
 Sur cette base, j'ai pris en charge la fonctionnalité de réservation de bout en bout côté backend, découpée en plusieurs tickets successifs. J'ai d'abord modélisé l'entité Booking : au-delà du strict critère d'acceptation, j'ai choisi d'y inclure le créneau réservé (cohérent avec le schéma de base de données) et de représenter le statut par un type énuméré plutôt qu'une simple chaîne de caractères, pour plus de sûreté. J'ai vérifié ce travail en conditions réelles en démarrant l'application et en contrôlant que le schéma SQL généré automatiquement par Hibernate correspondait exactement aux colonnes attendues.
@@ -288,7 +290,7 @@ Le ticket suivant a ajouté les routes de lecture, avec une exigence d'autorisat
 
 En parallèle, côté frontend, j'ai terminé la page d'inscription, dont une première structure (mise en page, dépendances de validation) avait déjà été posée. Il manquait plusieurs éléments pour couvrir l'ensemble des critères attendus : champs prénom et nom distincts plutôt qu'un unique champ nom complet, un véritable appel à l'API d'inscription avec redirection en cas de succès (l'ébauche se contentait d'un simple affichage en console), une validation côté client réellement alignée sur les règles du backend (format de mot de passe, format de téléphone français), et surtout la gestion des erreurs renvoyées par le serveur : conflit d'email ou de téléphone déjà utilisé, erreurs de validation détaillées par champ, erreurs réseau génériques. J'ai vérifié ce contrat de bout en bout, backend démarré, avec le payload exact envoyé par le formulaire. Une fois ces critères couverts, j'ai ajouté plusieurs améliorations d'ergonomie sans dépendance supplémentaire : mise en page plus compacte, bouton d'affichage/masquage du mot de passe, indicatif visuel du pays sur le champ téléphone, et deux cases de consentement RGPD obligatoires (conditions générales et politique de confidentialité), en documentant clairement la limite de cette implémentation : le consentement n'est pour l'instant géré que côté frontend, une vraie conformité nécessiterait de le persister côté backend.
 
-L'ensemble de ce travail suit des conventions de projet que j'ai respectées : une branche Git dédiée par ticket, fusion par pull request vers une branche d'intégration commune. Cette organisation m'a habitué à intervenir sur un code déjà écrit par d'autres, à en comprendre le fonctionnement avant de le modifier, et à documenter mes changements pour qu'ils restent compréhensibles par le reste de l'équipe.vail suit des conventions de projet strictes que j'ai dû respecter : une branche Git dédiée par ticket, fusion par pull request vers une branche d'intégration commune, une discipline qui m'a poussé à chercher des solutions de contournement plutôt que des corrections directes, comme sur le bug d'autorisation.`,
+L'ensemble de ce travail suit des conventions de projet que j'ai respectées : une branche Git dédiée par ticket, fusion par pull request vers une branche d'intégration commune. Cette organisation m'a habitué à intervenir sur un code déjà écrit par d'autres, à en comprendre le fonctionnement avant de le modifier, et à documenter mes changements pour qu'ils restent compréhensibles par le reste de l'équipe.`,
       technical: [
         "Java 21 / Spring Boot, architecture en couches (controller → service → interface/service → repository)",
         "Spring Data JPA / Hibernate pour la persistance, relations @ManyToOne et enums typés (@Enumerated)",
@@ -300,18 +302,19 @@ L'ensemble de ce travail suit des conventions de projet que j'ai respectées : u
         "Base H2 en mémoire pour le développement avec seeders de données de test, PostgreSQL prévu en cible",
         "Next.js (App Router), React et TypeScript, formulaires avec react-hook-form et validation Zod",
         "Tailwind CSS et composants shadcn/ui (Radix UI), gestion de paquets via pnpm",
+        "Outils de développement et de collaboration : VS Code, Postman, Notion (tableaux Kanban), Discord pour la communication d'équipe",
         "Workflow Git en équipe : une branche par ticket, revue et fusion via pull request vers une branche d'intégration"
       ],
       features: [
+        "Collaboration et continuité de projet au sein de l'équipe de stage (avec Loïc Delprat et Ylan Dessenne) via Notion (Kanban) et Discord",
         "Audit technique complet de l'existant, comparaison avec le cahier des charges, la stack cible et le schéma de base de données cible du projet, avec recensement précis des écarts et questions ouvertes",
-        "Documentation technique personnelle tenue tout au long du stage, ticket par ticket, servant de fil directeur de l'avancement (architecture, écarts avec la cible, fonctionnement de Spring Boot illustré par le code réel du projet)",
-        "Modèle de réservation (Booking) : statut typé, prix et acompte, liée à la cliente, à la prestation et au créneau, vérifiée par démarrage réel de l'application",
-        "API sécurisée de gestion des réservations (création, modification, suppression) réservée à l'administratrice, avec instantané tarifaire à la création et mise à jour partielle des champs métier",
-        "Routes de lecture des réservations avec autorisation fine admin/propriétaire, réutilisant un motif déjà présent dans le projet",
-        "Diagnostic et correction d'un bug de sécurité transversal (codes 500 au lieu de 403 sur les accès refusés) dans le gestionnaire d'erreurs central de l'application",
-        "Finalisation du formulaire d'inscription : champs complets, validation alignée sur l'API, appel serveur réel, redirection, gestion fine des erreurs (conflit, validation, réseau)",
-        "Améliorations d'ergonomie du formulaire : affichage/masquage du mot de passe, indicatif téléphonique visuel, consentement RGPD, mise en page compacte",
-        "Vérification systématique de chaque fonctionnalité en conditions réelles (backend démarré, comptes de test), avec tableaux de cas de test documentés"
+        "Documentation technique personnelle tenue tout au long du stage, ticket par ticket, servant de fil directeur de l'avancement",
+        "Modèle de réservation (Booking) : statut typé, prix et acompte, liée à la cliente, à la prestation et au créneau",
+        "API sécurisée de gestion des réservations (création, modification, suppression) testée via Postman et réservée à l'administratrice",
+        "Routes de lecture des réservations avec autorisation fine admin/propriétaire",
+        "Diagnostic et correction d'un bug de sécurité transversal (codes 500 au lieu de 403 sur les accès refusés) dans le gestionnaire d'erreurs central",
+        "Finalisation du formulaire d'inscription sous VS Code : validation, appel serveur, gestion des erreurs",
+        "Améliorations d'ergonomie du formulaire : affichage du mot de passe, indicatif téléphonique, consentement RGPD"
       ],
       reality: `Ce stage m'a fait passer d'un rôle d'apprenant sur des projets personnels à celui de contributeur sur un code déjà écrit par d'autres, avec ses conventions, ses choix historiques et ses contraintes. Le ressenti principal est celui d'une bascule : apprendre à lire et respecter le travail des autres avant d'apprendre à écrire le sien, une rigueur différente de celle d'un projet démarré seul de zéro.
 
@@ -325,6 +328,8 @@ Ce stage a surtout révélé l'intérêt que je porte aux pratiques d'ingénieri
       journey: `This internship took place at Loud, the company of my internship supervisor, Ludovic Roux, based in Toulouse, France, founded in 2025 right after he finished his studies, in the custom software development industry. His main activity is development work for a proprietary trading firm, his primary client, but he also takes on more punctual projects for other organisations, such as a town hall for canteen management or this one, L'Atelier de Camille, alongside teaching work in higher education. In the custom-development market, where software agencies, standardized SaaS products and independents all coexist, Loud focuses on the specific needs of small businesses, independents and local authorities, mostly within a local client base.
 
 L'Atelier de Camille is exactly that kind of engagement: an online booking platform for an independent nail technician, in the beauty and personal care sector, undergoing rapid digitalisation. Clients now expect to book from their phone, while the professional wants full control over her schedule, the approval of every request, and how her client base is tracked. The specification is explicit on this: no booking is possible until Camille has explicitly opened a time slot, and every request goes through manual approval before any deposit is charged.
+
+The project benefited from team continuity across different internship periods with other interns, notably Loïc Delprat and Ylan Dessenne. To structure tasks and track progress, we used a Notion workspace featuring a Kanban board set up by Ludovic Roux, grouping all tickets and features to be developed. Real-time communication, screen sharing, and technical coordination among team members took place via Discord. My personal working environment relied on VS Code for development, combined with Postman to thoroughly test API routes, simulate HTTP requests, validate response codes, and handle JWT authentication tokens.
 
 I joined a project already in motion: a fairly advanced Spring Boot backend (JWT authentication, user, service and availability-slot management already working), and a Next.js frontend still at the template stage. Before writing a single line of code, I spent the first part of the internship on a full audit: mapping the existing architecture (controller/service/repository layers, naming conventions, security setup), systematically comparing it against the functional specification, the target tech stack, and the target database schema already defined for the project, then precisely listing the gaps (Spring Boot version, missing entities like bookings or payments, dependencies not yet installed) and the open questions to settle before acting. Rather than a one-off audit, I made a habit of documenting each of my actions throughout the internship, ticket by ticket: this personal technical documentation became my guiding thread, letting me know exactly what I had done and where I stood, and it also helped me internalise how Spring Boot works by explaining it through the project's own code, to make sure I fully understood the ground before touching it.
 
@@ -347,19 +352,19 @@ All of this work follows project conventions I respected: a dedicated Git branch
         "Interactive API documentation with Swagger / SpringDoc OpenAPI",
         "In-memory H2 database for development with seeded test data, PostgreSQL planned for production",
         "Next.js (App Router), React and TypeScript, forms with react-hook-form and Zod validation",
-        "Tailwind CSS and shadcn/ui components (Radix UI), package management via pnpm",
+        "Development & collaboration tools: VS Code, Postman, Notion (Kanban boards), Discord for team communication",
         "Team Git workflow: one branch per ticket, reviewed and merged via pull request into an integration branch"
       ],
       features: [
+        "Team collaboration and project continuity across internship periods (with Loïc Delprat and Ylan Dessenne) using Notion (Kanban) and Discord",
         "Full technical audit of the existing codebase, compared against the specification, the target stack and the project's target database schema, with a precise list of gaps and open questions",
-        "Personal technical documentation kept throughout the internship, ticket by ticket, serving as a guiding thread for progress (architecture, gaps against the target, how Spring Boot works illustrated with the project's own code)",
-        "Booking domain model: typed status, price and deposit, linked to the client, the service and the time slot, verified through a real application run",
-        "Secured booking management API (create, update, delete) restricted to the admin, with a pricing snapshot at creation time and partial updates to business fields",
-        "Booking read routes with fine-grained admin-or-owner authorization, reusing a pattern already present in the project",
-        "Diagnosed and fixed a cross-cutting security bug (500s instead of 403s on denied access) in the application's central error handler",
-        "Finished the sign-up form: complete fields, validation aligned with the API, a real server call, redirect, and detailed error handling (conflict, validation, network)",
-        "Usability improvements to the form: password visibility toggle, visual phone country prefix, GDPR consent, more compact layout",
-        "Systematic end-to-end verification of every feature (backend running, test accounts), with documented test-case tables"
+        "Personal technical documentation kept throughout the internship, ticket by ticket, serving as a guiding thread for progress",
+        "Booking domain model: typed status, price and deposit, linked to the client, the service and the time slot",
+        "Secured booking management API (create, update, delete) tested via Postman and restricted to the admin",
+        "Booking read routes with fine-grained admin-or-owner authorization",
+        "Diagnosed and fixed a cross-cutting security bug (500s instead of 403s on denied access) in the central error handler",
+        "Completed the sign-up form in VS Code: validation, server call, and error handling",
+        "Usability improvements to the form: password toggle, phone prefix, GDPR consent"
       ],
       reality: `This internship moved me from a learner's role on personal projects to a contributor's role on code already written by others, with its own conventions, historical choices and constraints. The main feeling was a shift: learning to read and respect other people's work before learning to write my own, a different kind of rigour than working alone from a blank slate.
 
@@ -374,17 +379,19 @@ More than anything, this internship revealed how much I care about software engi
 
 L'Atelier de Camille는 정확히 그런 유형의 프로젝트입니다: 독립 네일 아티스트를 위한 온라인 예약 플랫폼으로, 뷰티·케어 산업이 빠르게 디지털화되는 흐름 속에 있습니다. 고객은 이제 휴대폰으로 예약하길 기대하고, 전문가는 자신의 일정, 모든 요청의 승인 여부, 고객 관리 방식을 완전히 통제하고 싶어 합니다. 명세서는 이 점을 명확히 하고 있습니다: Camille이 명시적으로 시간대를 열어두지 않으면 예약이 불가능하고, 모든 요청은 보증금이 청구되기 전에 수동 승인을 거쳐야 합니다.
 
+이 프로젝트는 Loïc Delprat, Ylan Dessenne 등 다른 실습생들과 함께 여러 세션에 걸쳐 연속성 있게 진행되었습니다. 업무를 체계화하고 진행 상황을 추적하기 위해, 우리는 Ludovic Roux가 설정한 Notion 워크스페이스와 Kanban 보드를 사용하여 티켓과 기능을 관리했습니다. 팀원 간의 실시간 소통, 화면 공유, 기술적 조율은 Discord를 통해 이루어졌습니다. 저의 개인적인 작업 환경은 개발을 위한 VS Code를 중심으로 구성되었으며, Postman을 활용하여 API 라우트를 엄격하게 테스트하고, HTTP 요청을 시뮬레이션하고, 응답 코드를 검증하며 JWT 인증 토큰을 관리했습니다.
+
 저는 이미 진행 중인 프로젝트에 합류했습니다: 상당히 발전된 Spring Boot 백엔드(JWT 인증, 사용자·서비스·예약 가능 시간대 관리가 이미 작동)와, 아직 템플릿 단계인 Next.js 프론트엔드였습니다. 코드를 한 줄도 쓰기 전에, 저는 인턴십 초반을 전체 감사에 할애했습니다: 기존 아키텍처 정리(controller/service/repository 계층, 명명 규칙, 보안 설정), 기능 명세서·목표 기술 스택·프로젝트에 이미 정의되어 있던 목표 데이터베이스 스키마와의 체계적 비교, 그리고 행동하기 전에 해결해야 할 격차(Spring Boot 버전, 예약이나 결제 같은 누락된 엔티티, 아직 설치되지 않은 의존성)와 질문의 정확한 목록화였습니다. 일회성 감사에 그치지 않고, 저는 인턴십 내내 티켓 단위로 제 모든 행동을 문서화하는 습관을 들였습니다: 이 개인적인 기술 문서는 제가 정확히 무엇을 했고 어디에 있는지 알 수 있게 해주는 길잡이가 되었으며, 프로젝트의 실제 코드로 Spring Boot의 작동 방식을 설명함으로써 이를 체득하는 데도 도움이 되었습니다. 이는 손대기 전에 기반을 완전히 이해했는지 확인하기 위함이었습니다.
 
 이를 바탕으로 저는 백엔드에서 예약 기능을 처음부터 끝까지 담당했으며, 여러 개의 연속된 티켓으로 나누어 진행했습니다. 먼저 Booking 엔티티를 모델링했습니다: 엄격한 승인 기준을 넘어, 저는 예약된 시간대를 포함하기로 결정했고(데이터베이스 스키마와 일치), 상태를 단순 문자열이 아닌 열거형 타입으로 표현하여 타입 안전성을 높였습니다. 애플리케이션을 실제로 실행하고 Hibernate가 자동 생성한 SQL 스키마가 예상 컬럼과 정확히 일치하는지 확인하여 이를 검증했습니다.
 
 이후 저는 예약 관리 API를 구축했습니다: 관리자에게만 허용되는 생성, 수정, 삭제입니다. 두 가지 설계 결정이 이 작업의 방향을 결정했습니다: 가격과 보증금은 생성 시점에 서비스로부터 복사됩니다(가격 스냅샷 방식으로, Camille이 이후 가격을 변경해도 과거 예약을 다시 쓰지 않도록 함), 그리고 수정은 부분 업데이트 방식입니다. 요청에서 제외된 필드는 변경되지 않으며, 이는 프로젝트 다른 곳에서 이미 사용되던 규칙과 일치합니다. 저는 모든 경우(생성, 수정, 삭제, 그리고 토큰 없음·존재하지 않는 서비스·잘못된 요청 같은 오류 상황)를 테스트하고 결과를 문서화했습니다.
 
-다음 티켓은 조회 라우트를 추가했으며, 다른 리소스보다 더 엄격한 권한 요구사항이 있었습니다: 관리자는 모든 예약을 봐야 하고, 각 고객은 자신의 예약만 봐야 합니다. 저는 확립된 규칙과 일관성을 유지하기 위해 프로젝트에 이미 존재하던 권한 부여 패턴(관리자 역할 또는 리소스 소유자)을 재사용했습니다. 여러 테스트 계정으로 이를 테스트하는 과정에서, 접근 거부 시 예상된 403 대신 500이 반환되는 것을 발견했습니다. 이는 실제로 예약뿐 아니라 프로젝트 전체의 여러 엔드포인트에 영향을 미치는 문제였습니다. 이 문제의 원인이 된 중앙 오류 처리기는 Ludovic Roux 본인이 작성한 것이었고, 이 프로젝트의 규칙은 엄격합니다: 다른 기여자가 이미 작성한 코드를 절대 수정하지 않는 것입니다. 그래서 저는 기존 파일을 건드리지 않고 이런 종류의 오류를 다른 방식으로 가로챌 수 있을 만큼 Spring Security의 내부 동작을 충분히 이해해야 했고, 더 구체적인 예외 처리기를 추가로 만들었습니다. 이 수정은 결국 프로젝트 내 영향을 받은 모든 엔드포인트의 문제를 해결했습니다.
+다음 티켓은 조회 라우트를 추가했으며, 다른 리소스보다 더 엄격한 권한 요구사항이 있었습니다: 관리자는 모든 예약을 봐야 하고, 각 고객은 자신의 예약만 봐야 합니다. 저는 확립된 규칙과 일관성을 유지하기 위해 프로젝트에 이미 존재하던 권한 부여 패턴(관리자 역할 또는 리소스 소유자)을 재사용했습니다. 여러 테스트 계정으로 이를 테스트하는 과정에서, 접근 거부 시 예상된 403 대신 500이 반환되는 것을 발견했습니다. 이는 실제로 예약뿐 아니라 프로젝트 전체의 여러 엔드포인트에 영향을 미치는 문제였습니다. 이 문제의 원인이 된 중앙 오류 처리기를 진단하고 누락된 처리를 추가하여 영향을 받은 모든 엔드포인트에서 문제를 해결했습니다.
 
 이와 병행하여 프론트엔드에서는 이미 초기 구조(레이아웃, 검증 의존성)가 마련되어 있던 회원가입 페이지를 완성했습니다. 요구되는 모든 기준을 충족하기 위해 여러 가지가 더 필요했습니다: 하나의 전체 이름 필드 대신 분리된 이름·성 필드, 성공 시 리다이렉트가 있는 실제 회원가입 API 호출(초안은 콘솔 로그만 남겼음), 백엔드 규칙(비밀번호 형식, 프랑스 전화번호 형식)과 실제로 일치하는 클라이언트 측 검증, 그리고 무엇보다 서버가 반환하는 오류 처리: 이미 사용 중인 이메일이나 전화번호, 필드별 상세 검증 오류, 일반 네트워크 오류였습니다. 저는 백엔드를 실행한 상태에서 폼이 보내는 정확한 페이로드로 이 계약을 처음부터 끝까지 검증했습니다. 이러한 기준을 충족한 후, 추가 의존성 없이 여러 사용성 개선을 더했습니다: 더 간결한 레이아웃, 비밀번호 표시/숨김 토글, 전화번호 필드의 시각적 국가 표시, 그리고 필수 GDPR 동의 체크박스 두 개(약관 및 개인정보 처리방침)였으며, 이 구현의 한계를 명확히 문서화했습니다: 동의는 현재 프론트엔드에서만 처리되며, 완전한 준수를 위해서는 백엔드에도 이를 저장해야 합니다.
 
-이 모든 작업은 제가 지켜야 했던 엄격한 프로젝트 규칙을 따릅니다: 티켓당 전용 Git 브랜치, 공유 통합 브랜치로의 풀 리퀘스트 병합, 그리고 다른 기여자가 이미 작성한 코드를 절대 수정하지 않는다는 규칙입니다. 이 규칙은 권한 부여 버그의 경우처럼 직접적인 수정 대신 우회 해결책을 찾도록 저를 이끌었습니다.`,
+이 모든 작업은 제가 지켜야 했던 프로젝트 규칙을 따릅니다: 티켓당 전용 Git 브랜치, 공유 통합 브랜치로의 풀 리퀘스트 병합. 이 조직력 덕분에 다른 사람이 이미 작성한 코드를 다루고, 수정하기 전에 작동 방식을 이해하며, 팀의 나머지 사람들이 이해할 수 있도록 변경 사항을 문서화하는 법을 익힐 수 있었습니다.`,
       technical: [
         "Java 21 / Spring Boot, 계층형 아키텍처 (controller → service 인터페이스/구현 → repository)",
         "영속성을 위한 Spring Data JPA / Hibernate, @ManyToOne 관계 및 타입이 지정된 열거형(@Enumerated)",
@@ -395,19 +402,19 @@ L'Atelier de Camille는 정확히 그런 유형의 프로젝트입니다: 독립
         "Swagger / SpringDoc OpenAPI를 사용한 대화형 API 문서화",
         "테스트 데이터가 시드된 개발용 인메모리 H2 데이터베이스, 운영 환경용 PostgreSQL 예정",
         "Next.js(App Router), React, TypeScript, react-hook-form과 Zod 검증을 사용한 폼",
-        "Tailwind CSS와 shadcn/ui 컴포넌트(Radix UI), pnpm을 통한 패키지 관리",
+        "개발 및 협업 도구: VS Code, Postman, Notion(Kanban 보드), 팀 소통을 위한 Discord",
         "팀 Git 워크플로우: 티켓당 하나의 브랜치, 통합 브랜치로의 풀 리퀘스트를 통한 리뷰 및 병합"
       ],
       features: [
+        "실습 팀원(Loïc Delprat 및 Ylan Dessenne)과 Notion(Kanban) 및 Discord를 활용한 업무 연속성 및 소통 유지",
         "기존 코드베이스에 대한 전체 기술 감사, 명세서·목표 스택·프로젝트의 목표 데이터베이스 스키마와의 비교, 격차와 미해결 질문의 정확한 목록화",
-        "인턴십 내내 티켓 단위로 작성한 개인 기술 문서, 진행 상황의 길잡이 역할(아키텍처, 목표 대비 격차, 프로젝트 실제 코드로 설명한 Spring Boot 작동 방식)",
-        "예약 도메인 모델: 타입이 지정된 상태, 가격과 보증금, 고객·서비스·시간대와의 연결, 실제 애플리케이션 실행을 통한 검증",
-        "관리자로 제한된 보안 예약 관리 API(생성, 수정, 삭제), 생성 시점의 가격 스냅샷 및 비즈니스 필드의 부분 업데이트",
+        "인턴십 내내 티켓 단위로 작성한 개인 기술 문서, 진행 상황의 길잡이 역할",
+        "예약 도메인 모델: 타입이 지정된 상태, 가격과 보증금, 고객·서비스·시간대와의 연결",
+        "Postman을 통해 테스트된, 관리자로 제한된 보안 예약 관리 API(생성, 수정, 삭제)",
         "프로젝트에 이미 존재하던 패턴을 재사용한, 세밀한 관리자/소유자 권한 부여가 적용된 예약 조회 라우트",
-        "다른 기여자의 코드를 수정하지 않고 범용적인 보안 버그(접근 거부 시 403 대신 500) 진단 및 수정",
-        "회원가입 폼 완성: 전체 필드, API와 일치하는 검증, 실제 서버 호출, 리다이렉션, 상세한 오류 처리(충돌, 검증, 네트워크)",
-        "폼의 사용성 개선: 비밀번호 표시 토글, 시각적 전화번호 국가 접두사, GDPR 동의, 더 간결한 레이아웃",
-        "모든 기능에 대한 체계적인 종단 간 검증(백엔드 실행, 테스트 계정), 문서화된 테스트 케이스 표"
+        "중앙 오류 처리기에서 범용적인 보안 버그(접근 거부 시 403 대신 500) 진단 및 수정",
+        "VS Code에서 회원가입 폼 완성: 검증, 서버 호출, 오류 처리",
+        "폼의 사용성 개선: 비밀번호 토글, 전화번호 국가 접두사, GDPR 동의"
       ],
       reality: `이 인턴십을 통해 저는 개인 프로젝트에서 배우는 역할에서, 이미 다른 사람이 작성한 코드, 나름의 규칙, 역사적 선택, 제약을 가진 코드에 기여하는 역할로 옮겨갔습니다. 가장 큰 느낌은 일종의 전환이었습니다: 스스로 코드를 쓰기 전에, 다른 사람의 작업을 읽고 존중하는 법을 먼저 배우는 것, 혼자 백지에서 시작하는 것과는 다른 종류의 엄격함이었습니다.
 
