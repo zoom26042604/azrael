@@ -2,7 +2,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { AlertCircle, RefreshCw, Github, ExternalLink } from 'lucide-react';
 
-const CV_URL = process.env.NEXT_PUBLIC_CV_URL || 'http://localhost:3002';
+const CV_URL = process.env.NEXT_PUBLIC_CV_URL || 'https://cv.nathan-ferre.fr';
 const LOAD_TIMEOUT = 8000; // 8 secondes timeout
 
 export default function CVPage() {

@@ -14,6 +14,13 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   // Configuration vide pour Turbopack (silence le warning)
   turbopack: {},
+  // Optimisations de production
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'react-icons'],
+  },
 };
 
 export default withPWA({

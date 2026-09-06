@@ -24,10 +24,8 @@ export default function Document() {
         <meta name="twitter:image" content="/og-image.png" />
         
         {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
@@ -38,9 +36,6 @@ export default function Document() {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Nathan FERRE" />
-        
-        {/* Canonical URL */}
-        <link rel="canonical" href="https://nathan-ferre.fr/" />
       </Head>
       <body suppressHydrationWarning>
         <Main />

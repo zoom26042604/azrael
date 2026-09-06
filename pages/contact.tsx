@@ -80,22 +80,30 @@ export default function ContactPage() {
 
     setStatus('loading');
 
-    // TODO: Intégrer EmailJS ou autre service d'email
-    // Pour l'instant, simuler l'envoi
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Simuler un succès
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
       
       // Reset le status après 5 secondes
       setTimeout(() => setStatus('idle'), 5000);
     } catch (error) {
+      console.error('Error sending message:', error);
       setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
     }
-  }, [formData, language]);
+  }, [formData]);
 
   return (
     <>
@@ -317,16 +325,16 @@ export default function ContactPage() {
             <div className="space-y-3">
               <Link
                 href="/socials"
-                className="flex items-center gap-3 transition-colors group"
+                className="flex items-center gap-3 transition-colors group rounded"
                 style={{ color: 'var(--color-subtext0)' }}
                 onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-subtext0)'}
               >
-                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
                 </svg>
                 <span>{t('contact.my_socials')}</span>
-                <svg className="group-hover:translate-x-1 transition-transform" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="group-hover:translate-x-1 transition-transform" width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
                 </svg>
               </Link>

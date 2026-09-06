@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useCallback } from 'react';
+import { useMemo, useCallback, useEffect, useState } from 'react';
 import Breadcrumb from '@/src/components/layout/Breadcrumb';
 import LanguageSwitcher from '@/src/components/layout/LanguageSwitcher';
 import ThemeToggle from '@/src/components/ThemeToggle';
@@ -14,13 +14,18 @@ interface HeaderProps {
 
 export default function Header({ toggleSidebar }: HeaderProps) {
   const { t } = useLanguage();
+  const [currentPath, setCurrentPath] = useState('/');
+  
+  useEffect(() => {
+    setCurrentPath(window.location.pathname);
+  }, []);
   
   const mainNavItems = useMemo(() => [
-    { title: t('nav.home'), href: '/' },
-    { title: t('nav.about'), href: '/about' },
-    { title: t('nav.projects'), href: '/projects' },
-    { title: t('nav.contact'), href: '/contact' },
-    { title: t('nav.resume'), href: '/cv' }
+    { title: t('nav.home'), href: '/', external: false },
+    { title: t('nav.about'), href: '/about', external: false },
+    { title: t('nav.projects'), href: '/projects', external: false },
+    { title: t('nav.contact'), href: '/contact', external: false },
+    { title: t('nav.resume'), href: '/cv', external: false }
   ], [t]);
 
   const handleButtonMouseEnter: ButtonMouseHandler = useCallback((e) => {
@@ -54,7 +59,7 @@ export default function Header({ toggleSidebar }: HeaderProps) {
       <Breadcrumb />
       <button
         onClick={toggleSidebar}
-        className="rounded p-2 lg:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+        className="rounded p-2 lg:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent)"
         style={{ color: 'var(--color-text)' }}
         onMouseEnter={handleButtonMouseEnter}
         onMouseLeave={handleButtonMouseLeave}
@@ -65,20 +70,40 @@ export default function Header({ toggleSidebar }: HeaderProps) {
         <Menu size={24} aria-hidden="true" />
       </button>
       <nav className="hidden items-center space-x-4 lg:flex" role="navigation" aria-label="Main navigation">
-        {mainNavItems.map((item) => (
-          <a
-            key={item.title}
-            href={item.href}
-            target={item.external ? '_blank' : undefined}
-            rel={item.external ? 'noopener noreferrer' : undefined}
-            className="rounded px-3 py-2 text-sm font-medium transition-colors duration-150"
-            style={{ color: 'var(--color-text)' }}
-            onMouseEnter={handleLinkMouseEnter}
-            onMouseLeave={handleLinkMouseLeave}
-          >
-            {item.title}
-          </a>
-        ))}
+        {mainNavItems.map((item) => {
+          // Si c'est le lien Accueil ET qu'on est sur la page d'accueil, afficher un bouton scroll-to-top
+          if (item.href === '/' && currentPath === '/') {
+            return (
+              <button
+                key={item.title}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="rounded px-3 py-2 text-sm font-medium transition-colors duration-150"
+                style={{ color: 'var(--color-text)' }}
+                onMouseEnter={handleButtonMouseEnter}
+                onMouseLeave={handleButtonMouseLeave}
+                aria-label="Retour en haut de la page"
+              >
+                {item.title}
+              </button>
+            );
+          }
+          
+          // Sinon, afficher un lien normal
+          return (
+            <a
+              key={item.title}
+              href={item.href}
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noopener noreferrer' : undefined}
+              className="rounded px-3 py-2 text-sm font-medium transition-colors duration-150"
+              style={{ color: 'var(--color-text)' }}
+              onMouseEnter={handleLinkMouseEnter}
+              onMouseLeave={handleLinkMouseLeave}
+            >
+              {item.title}
+            </a>
+          );
+        })}
         <ThemeToggle />
         <LanguageSwitcher />
         <button

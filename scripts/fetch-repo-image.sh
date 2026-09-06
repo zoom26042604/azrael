@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# fetch-repo-image.sh - Fetch GitHub repository image with explicit filename
+# fetch-repo-image.sh - Fetch GitHub repository image with Bannerbear template
 # Usage: ./fetch-repo-image.sh <github-repo-url> <output-filename> [output-directory]
 
 set -e
@@ -22,7 +22,7 @@ OUTPUT_DIR="${3:-.}"
 # Create output directory if it doesn't exist
 mkdir -p "$OUTPUT_DIR"
 
-echo "Fetching image for: $OUTPUT_NAME"
+echo "Fetching project data for: $OUTPUT_NAME"
 echo "Repository: $REPO_URL"
 
 # The image service expects a repository, but some projects belong to an
@@ -78,6 +78,7 @@ if [ -z "$REPOSITORY" ] || [ "$REPOSITORY" = "$REPO_PATH" ]; then
 else
 
 # Make API request with all required headers
+# This uses the Bannerbear-based API to generate the social image
 API_RESPONSE=$(curl -s 'https://lpf64gdwdb.execute-api.us-east-1.amazonaws.com/?repo='"$REPO_URL"'' \
   -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:143.0) Gecko/20100101 Firefox/143.0' \
   -H 'Accept: application/json, text/javascript, */*; q=0.01' \
@@ -94,6 +95,19 @@ API_RESPONSE=$(curl -s 'https://lpf64gdwdb.execute-api.us-east-1.amazonaws.com/?
   -H 'Pragma: no-cache' \
   -H 'Cache-Control: no-cache' \
   -H 'TE: trailers')
+
+# Note: To use custom Bannerbear template with description, you would need:
+# 1. Your Bannerbear API key
+# 2. A template ID with fields for: title, description, tags
+# 3. Make POST request to: https://api.bannerbear.com/v2/images with:
+#    {
+#      "template": "YOUR_TEMPLATE_ID",
+#      "modifications": [
+#        {"name": "title", "text": "$REPO_NAME"},
+#        {"name": "description", "text": "$REPO_DESC"},
+#        {"name": "tags", "text": "$REPO_TOPICS"}
+#      ]
+#    }
 
 # Check if API response is valid JSON
 if ! echo "$API_RESPONSE" | jq . >/dev/null 2>&1; then
@@ -127,12 +141,11 @@ else
 fi
 fi
 
-# Check if convert (ImageMagick) is available for conversion
-if command -v convert &>/dev/null; then
-    echo "Converting to WebP format using ImageMagick..."
-    if convert "${OUTPUT_DIR}/${OUTPUT_NAME}.jpg" -quality 50 "${OUTPUT_DIR}/${OUTPUT_NAME}.webp" &>/dev/null; then
+# Check if ImageMagick is available for conversion
+if command -v magick &>/dev/null; then
+    echo "Converting to WebP format..."
+    if magick "${OUTPUT_DIR}/${OUTPUT_NAME}.jpg" -quality 85 "${OUTPUT_DIR}/${OUTPUT_NAME}.webp" &>/dev/null; then
         echo "Successfully converted to WebP"
-        # Remove the JPG file after successful conversion
         rm -f "${OUTPUT_DIR}/${OUTPUT_NAME}.jpg"
         echo "Done! WebP file created: ${OUTPUT_DIR}/${OUTPUT_NAME}.webp"
     else
@@ -140,9 +153,8 @@ if command -v convert &>/dev/null; then
     fi
 elif command -v cwebp &>/dev/null; then
     echo "Converting to WebP format..."
-    if cwebp -q 50 "${OUTPUT_DIR}/${OUTPUT_NAME}.jpg" -o "${OUTPUT_DIR}/${OUTPUT_NAME}.webp" &>/dev/null; then
+    if cwebp -q 85 "${OUTPUT_DIR}/${OUTPUT_NAME}.jpg" -o "${OUTPUT_DIR}/${OUTPUT_NAME}.webp" &>/dev/null; then
         echo "Successfully converted to WebP"
-        # Remove the JPG file after successful conversion
         rm -f "${OUTPUT_DIR}/${OUTPUT_NAME}.jpg"
         echo "Done! WebP file created: ${OUTPUT_DIR}/${OUTPUT_NAME}.webp"
     else

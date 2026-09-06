@@ -137,18 +137,19 @@ export default function ProjectPage() {
             <div className="flex items-center gap-x-2">
               <Tag size={18} style={{ color: 'var(--color-subtext0)' }} />
               <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag: string) => {
-                  const tagColor = getTagColor(tag, slug);
-                  const style = tagColor.type === 'hex' 
-                    ? { backgroundColor: 'var(--color-surface0)', color: tagColor.color }
-                    : { backgroundColor: 'var(--color-surface0)', color: `var(--color-${tagColor.color})` };
-                  
-                  return (
-                    <span key={tag} className="rounded px-2 py-1 text-xs font-semibold" style={style}>
-                      {tag}
-                    </span>
-                  );
-                })}
+                {project.tags.map((tag: string) => (
+                  <span 
+                    key={tag} 
+                    className="rounded px-2 py-1 text-xs font-semibold" 
+                    style={{ 
+                      backgroundColor: 'var(--color-surface0)', 
+                      color: 'var(--color-text)',
+                      border: '1px solid var(--color-surface2)'
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
           )}
