@@ -11,4 +11,5 @@ PROJECT_REPOS=(
     ["portfolio-personnel"]="https://github.com/zoom26042604/azrael"
     ["game-2048"]="https://github.com/zoom26042604/game-2048"
     ["interactive-cv"]="https://github.com/zoom26042604/cv"
+    ["stage-camille"]="https://github.com/L-Atelier-de-Camille"
 )
