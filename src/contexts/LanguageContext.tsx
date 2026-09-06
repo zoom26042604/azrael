@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'fr' | 'en' | 'ko';
 
@@ -13,17 +13,16 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('fr');
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  useEffect(() => {
-    // Après l'hydratation, charger la langue depuis localStorage
-    const saved = localStorage.getItem('portfolio-language') as Language;
-    if (saved && ['fr', 'en', 'ko'].includes(saved)) {
-      setLanguageState(saved);
+  const [language, setLanguageState] = useState<Language>(() => {
+    // Initialiser depuis localStorage si disponible
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('portfolio-language') as Language;
+      if (saved && ['fr', 'en', 'ko'].includes(saved)) {
+        return saved;
+      }
     }
-    setIsHydrated(true);
-  }, []);
+    return 'fr';
+  });
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
@@ -83,7 +82,7 @@ const translations = {
       student: 'Étudiant',
       student_it: 'Étudiant en Informatique',
       at: 'à',
-      passionate: 'Passionné par le développement web et les technologies modernes.',
+      passionate: 'Passionné par le développement plus principalement du web et du devops et les technologies modernes.',
       about_me: 'Plus à propos de moi',
     },
     featured: {
@@ -274,7 +273,7 @@ const translations = {
       student: 'Student',
       student_it: 'Computer Science Student',
       at: 'at',
-      passionate: 'Passionate about web development and modern technologies.',
+      passionate: 'Passionate about devops and web development and modern technologies.',
       about_me: 'More about me',
     },
     featured: {

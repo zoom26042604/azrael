@@ -75,7 +75,9 @@ export default function Experience({ timeline }: ExperienceProps) {
               >
                 <img
                   src={item.logoUrl}
-                  alt={item.logoAlt}
+                  alt=""
+                  width={32}
+                  height={28}
                   className="flex max-h-8 min-h-7 w-auto min-w-6 object-contain transition-transform duration-200 group-hover:scale-105"
                   style={{
                     transform: item.logoScale ? `scale(${item.logoScale})` : undefined
@@ -139,19 +141,21 @@ export default function Experience({ timeline }: ExperienceProps) {
                       <div className="flex items-center gap-3">
                         <img
                           src={item.logoUrl}
-                          alt={item.logoAlt}
+                          alt=""
+                          width={40}
+                          height={40}
                           className="h-10 w-auto max-w-16 shrink-0 rounded-md object-contain p-1"
                           style={{
                             transform: item.logoScale ? `scale(${item.logoScale})` : undefined
                           }}
                         />
                         <div>
-                          <h4 
+                          <p 
                             className="font-semibold transition-colors"
                             style={{ color: 'var(--color-text)' }}
                           >
                             {item.company}
-                          </h4>
+                          </p>
                           <p className="text-sm" style={{ color: 'var(--color-subtext0)' }}>
                             {item.role}
                           </p>

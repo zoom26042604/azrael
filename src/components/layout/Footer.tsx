@@ -1,29 +1,13 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { Clock, GitCommit, Github, Linkedin } from 'lucide-react';
+import { Clock, Github, Linkedin } from 'lucide-react';
 
 const year = new Date().getFullYear();
-const commitSha = process.env.NEXT_PUBLIC_COMMIT_SHA || 'dev';
-const shortSha = commitSha.substring(0, 7);
+const version = process.env.NEXT_PUBLIC_VERSION || '0.1.0';
 
-// Determine the environment-based link URL
-const getCommitLinkUrl = () => {
-  if (commitSha !== 'dev') {
-    // Production: link to the specific commit
-    return `https://github.com/zoom26042604/azrael/commit/${commitSha}`;
-  }
-  
-  // Development: determine the current branch
-  const currentBranch = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF || 
-                       process.env.VERCEL_GIT_COMMIT_REF || 
-                       'dev';
-  
-  // Link to the branch on GitHub
-  return `https://github.com/zoom26042604/azrael/tree/${currentBranch}`;
-};
-
-const commitLinkUrl = getCommitLinkUrl();
+// Link to master branch on GitHub
+const repoUrl = 'https://github.com/zoom26042604/azrael/tree/master';
 
 export default function Footer() {
   const [timeOnSite, setTimeOnSite] = useState('00:00');
@@ -88,55 +72,56 @@ export default function Footer() {
       >
         <div className="flex flex-col items-center gap-2 md:flex-row md:gap-3">
           <span>© {year} Nathan FERRE</span>
-          <span className="hidden md:inline" style={{ color: 'var(--color-surface1)' }}>•</span>
+          <span className="hidden md:inline" style={{ color: 'var(--color-text)' }} aria-hidden="true">•</span>
           <a
-            href={commitLinkUrl}
+            href={repoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 transition-colors duration-200"
+            aria-label={`View version ${version} on GitHub`}
+            className="flex items-center gap-1 transition-colors duration-200 rounded"
             style={{ color: 'var(--color-subtext1)' }}
             onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
             onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-subtext1)'}
           >
-            <GitCommit size={14} />
-            <span className="font-mono text-xs">{shortSha}</span>
+            <Github size={14} aria-hidden="true" />
+            <span className="font-mono text-xs">v{version}</span>
           </a>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5">
-            <Clock size={14} style={{ color: 'var(--color-text)' }} />
+          <div className="flex items-center gap-1.5" aria-label={`Time on site: ${timeOnSite}`}>
+            <Clock size={14} style={{ color: 'var(--color-text)' }} aria-hidden="true" />
             <span style={{ color: 'var(--color-subtext1)' }}>
               <span className="font-mono" style={{ color: 'var(--color-peach)' }}>{timeOnSite}</span>
             </span>
           </div>
 
-          <span className="hidden sm:inline" style={{ color: 'var(--color-surface1)' }}>•</span>
+          <span className="hidden sm:inline" style={{ color: 'var(--color-text)' }} aria-hidden="true">•</span>
 
           <div className="flex items-center gap-x-3">
             <a
               href="https://github.com/zoom26042604"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="transition-colors duration-200"
+              aria-label="GitHub profile"
+              className="transition-colors duration-200 rounded"
               style={{ color: 'var(--color-subtext1)' }}
               onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
               onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-subtext1)'}
             >
-              <Github size={18} />
+              <Github size={18} aria-hidden="true" />
             </a>
             <a
               href="https://www.linkedin.com/in/nathan-ferre-9ab76723a/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="transition-colors duration-200"
+              aria-label="LinkedIn profile"
+              className="transition-colors duration-200 rounded"
               style={{ color: 'var(--color-subtext1)' }}
               onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent)'}
               onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-subtext1)'}
             >
-              <Linkedin size={18} />
+              <Linkedin size={18} aria-hidden="true" />
             </a>
           </div>
         </div>

@@ -26,7 +26,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const colorNames = [
       'rosewater', 'flamingo', 'pink', 'mauve', 'red', 'maroon', 
       'peach', 'yellow', 'green', 'teal', 'sky', 'sapphire', 
-      'blue', 'lavender', 'text', 'subtext1', 'subtext0', 
+      'blue', 'lavender', 'text',
       'overlay0', 'surface2', 'surface1', 'surface0', 'base', 'mantle'
     ] as const;
 
@@ -36,6 +36,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       const cssVarValue = rootStyle.getPropertyValue(`--${themePrefix}-${colorName}`);
       root.style.setProperty(`--color-${colorName}`, cssVarValue);
     });
+
+    // WCAG AA compliant: use text color for subtext to ensure 4.5:1 contrast ratio
+    const textValue = rootStyle.getPropertyValue(`--${themePrefix}-text`);
+    root.style.setProperty('--color-subtext1', textValue);
+    root.style.setProperty('--color-subtext0', textValue);
 
     // Update accent color
     const accentValue = rootStyle.getPropertyValue(`--${themePrefix}-peach`);

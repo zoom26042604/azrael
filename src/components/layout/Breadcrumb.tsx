@@ -255,9 +255,8 @@ export default function Breadcrumb() {
           const isLast = i === breadcrumbs.length - 1;
 
           return (
-            <div key={`bred-${i}`} className="inline-flex items-center">
-              <li className="mx-0.5 inline-flex items-center">/</li>
-              <li className="inline-flex items-center">
+            <li key={`bred-${i}`} className="inline-flex items-center">
+              <span className="mx-0.5">/</span>
                 {isLast ? (
                   <span aria-current="page" style={{ color: 'var(--color-text)' }}>{text}</span>
                 ) : (
@@ -273,14 +272,13 @@ export default function Breadcrumb() {
                   </Link>
                 )}
               </li>
-            </div>
           );
         })}
         
-        <li className="mx-0.5 inline-flex items-center" aria-hidden="true">/</li>
-        <li className="ml-1 inline-flex items-center">
+        <li className="inline-flex items-center">
+          <span className="mx-0.5" aria-hidden="true">/</span>
           <span 
-            className="cursor-blink h-4 w-2" 
+            className="cursor-blink h-4 w-2 ml-1" 
             style={{ backgroundColor: 'var(--color-accent)' }}
             aria-hidden="true"
           />
